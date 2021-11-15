@@ -31,36 +31,57 @@ export const useStylesLogin: any = makeStyles(() =>
     login_form_content: {
       position: "absolute",
       top: "50%",
-      transform: "translateY(-50% )",
-      width: "100%",
+      left: "50%",
+      transform: "translate(-50%, -50% )",
       boxSizing: "border-box",
+      width: "60%",
     },
     login_form_content_seperator_container: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       boxSizing: "border-box",
+      margin: "25px 0 ",
+      width: "100%",
     },
     login_form_content_seperator: {
-      flexGrow: 0.8,
-      minHeight: "1px",
-      maxHeight: "1px",
-      backgroundColor: "grey",
+      flexGrow: 0.7,
+      minHeight: "2px",
+      maxHeight: "2px",
+      backgroundColor: "rgb(146, 227, 169)",
     },
     login_form_title: {
-      fontSize: "30px",
+      fontSize: "55px",
       fontWeight: 500,
       margin: "10px 0",
+      fontFamily: "'Dancing Script', cursive",
+      textAlign: "center",
+      color: "rgb(146, 227, 169)",
     },
     login_form_message_type: {
-      fontSize: "20px",
-      fontWeight: 500,
-      "& span": {},
+      fontSize: "18px",
+      textAlign: "center",
+      "& span": {
+        fontWeight: 500,
+        textDecoration: "underline",
+      },
     },
     login_form_content_seperator_text: {
-      margin: "0px 8px",
+      margin: "0px 12px",
       fontWeight: 500,
       fontSize: "18px",
+    },
+    login_form_inputs_container: {
+      textAlign: "center",
+      "& .MuiFormControl-root": {
+        width: "100%",
+      },
+    },
+    contact_text: {
+      textAlign: "center",
+      fontWeight: 500,
+      fontSize: "18px",
+      textDecoration: "underline",
     },
   })
 );
