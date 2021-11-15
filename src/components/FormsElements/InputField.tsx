@@ -5,9 +5,10 @@ import {
   useFormState,
 } from "react-hook-form";
 import { OutlinedInputProps, TextField } from "@material-ui/core";
-import { useStylesTextField } from "../../styles/textFieldStyles";
+
 import clsx from "clsx";
 import _ from "lodash";
+import { useStylesTextField } from "../../styles/textFieldStyles";
 
 interface PropType {
   name: string;
@@ -37,6 +38,7 @@ const InputField = ({
   rowsMax,
   disabled = false,
   disabledErrorMessage = false,
+  typeValue = "text",
 }: PropType) => {
   const classes: any = useStylesTextField();
   const { control, watch } = useFormContext();
@@ -49,24 +51,27 @@ const InputField = ({
         control={control}
         defaultValue={_.get(watch(), name)}
         render={({ field: { ref, ...rest } }) => (
-          <TextField
-            disabled={disabled}
-            placeholder={placeholder}
-            multiline={multiline}
-            rows={rows}
-            rowsMax={rowsMax}
-            error={Boolean(_.get(errors, name))}
-            inputRef={ref}
-            {...rest}
-            label={label}
-            variant="outlined"
-            className={clsx(classes.second)}
-            InputProps={InputProps}
-            size="small"
-          />
+          <>
+            <TextField
+              disabled={disabled}
+              placeholder={placeholder}
+              multiline={multiline}
+              rows={rows}
+              rowsMax={rowsMax}
+              error={Boolean(_.get(errors, name))}
+              inputRef={ref}
+              {...rest}
+              label={label}
+              variant="outlined"
+              className={clsx(classes.second)}
+              InputProps={InputProps}
+              type={typeValue}
+            />
+          </>
         )}
         rules={rules}
       />
+
       {!disabledErrorMessage ? (
         <div className={clsx(classes.error)}>
           {_.get(errors, name) ? _.get(errors, `${name}.message`) : null}

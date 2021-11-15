@@ -4,16 +4,32 @@ import { makeStyles, createStyles } from "@material-ui/core";
 
 export const useStylesButton: any = makeStyles((theme: Theme) =>
   createStyles({
+    BigBlueButton: {
+      textTransform: "none",
+      padding: "8px 24px ",
+      fontSize: "1.1em",
+      width: "fit-content ",
+      minWidth: "6em",
+      backgroundColor: `${theme.palette.secondary.main} `,
+      color: "white ",
+      fontWeight: 600,
+      "&:hover": {
+        backgroundColor: hexRgb(theme.palette.secondary.main, {
+          format: "css",
+          alpha: 0.9,
+        }),
+      },
+    },
     BlueButton: {
       textTransform: "none",
       padding: "6px 10px ",
       fontSize: "1em ",
       width: "fit-content ",
       minWidth: "6em ",
-      backgroundColor: `${theme.palette.primary.main} `,
+      backgroundColor: `${theme.palette.secondary.main} `,
       color: "white ",
       "&:hover": {
-        backgroundColor: hexRgb(theme.palette.primary.main, {
+        backgroundColor: hexRgb(theme.palette.secondary.main, {
           format: "css",
           alpha: 0.9,
         }),

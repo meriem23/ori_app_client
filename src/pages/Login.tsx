@@ -9,6 +9,9 @@ import {
 } from "react-hook-form";
 import Field from "../components/FormsElements/Field";
 import { Button } from "@material-ui/core";
+import { useStylesButton } from "../styles/buttonStyles";
+import { useMutation } from "react-query";
+import { login } from "../services/authServices";
 
 export default function Login() {
   interface FormLoginSchema {
@@ -32,8 +35,7 @@ export default function Login() {
       rules: {
         required: "Ce champ est obligatoire",
         pattern: {
-          value:
-            /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+          value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
           message: "Veuillez saisir un E-mail valide!",
         },
       },
@@ -43,6 +45,7 @@ export default function Login() {
       name: "password",
       label: "Mot de passe",
       disabled: false,
+      typeValue: "password",
       rules: {
         required: "Ce champ est obligatoire",
         minLength: {
@@ -53,11 +56,22 @@ export default function Login() {
     },
   ];
 
+  const {
+    mutateAsync: LoginMutateAsync,
+    isSuccess: isLoginSuccess,
+    data: LoginData,
+    isError: isLoginError,
+    isLoading: isLoadingLogin,
+    reset: resetLogin,
+  } = useMutation(login);
+
   const onSubmit = (data: any) => {
+    LoginMutateAsync(data);
     console.log(data);
   };
 
   const loginClasses = useStylesLogin();
+  const ButtonClasses = useStylesButton();
   return (
     <div className={loginClasses.login_container}>
       <div className={loginClasses.login_illustration_container}>
@@ -67,7 +81,7 @@ export default function Login() {
         <div className={loginClasses.login_form_content}>
           <p className={loginClasses.login_form_title}>Bienvenue</p>
           <p className={loginClasses.login_form_message_type}>
-            Vous n'avez pas de compte? <span> Créez un compte</span>
+            Vous n'avez pas de compte ? <span> Créez un compte</span>
           </p>
           <div className={loginClasses.login_form_content_seperator_container}>
             <div className={loginClasses.login_form_content_seperator}></div>
@@ -77,13 +91,19 @@ export default function Login() {
             <div className={loginClasses.login_form_content_seperator}></div>
           </div>
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className={loginClasses.login_form_inputs_container}
+            >
               {formInputs.map((el: any) => (
                 <Field name={el.name} {...el} />
               ))}
-              <Button type="submit">Submit</Button>
+              <Button type="submit" className={ButtonClasses.BigBlueButton}>
+                Se Connecter
+              </Button>
             </form>
           </FormProvider>
+          <p className={loginClasses.contact_text}>Contactez-nous</p>
         </div>
       </div>
     </div>
