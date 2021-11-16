@@ -14,7 +14,7 @@ export const useStylesHeader: any = makeStyles((theme: Theme) =>
       backgroundColor: "rgba(241, 245, 249, 1)",
       //   borderRadius: "8px",
       position: "sticky",
-      top: "68px",
+      top: "40px",
       "&::before": {
         content: '""',
         display: "block",
@@ -33,11 +33,14 @@ export const useStylesHeader: any = makeStyles((theme: Theme) =>
         position: "absolute",
         top: "41px",
       },
+      "& a": {
+        textDecoration: "none !important",
+      },
     },
     title: {
       fontSize: "22px",
       fontWeight: 500,
-      color: theme.palette.primary.main,
+      color: theme.palette.text.primary,
     },
     main_button: {
       margin: "0 !important",

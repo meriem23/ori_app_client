@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginIllustration from "../images/loginIllustration";
 import { useStylesLogin } from "../styles/loginStyles";
 import {
@@ -12,6 +12,8 @@ import { Button } from "@material-ui/core";
 import { useStylesButton } from "../styles/buttonStyles";
 import { useMutation } from "react-query";
 import { login } from "../services/authServices";
+import { useHistory } from "react-router";
+import { useSnackbar } from "notistack";
 
 export default function Login() {
   interface FormLoginSchema {
@@ -69,6 +71,36 @@ export default function Login() {
     LoginMutateAsync(data);
     console.log(data);
   };
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const { push } = useHistory();
+
+  useEffect(() => {
+    if (isLoginSuccess && LoginData) {
+      // @ts-ignore
+      localStorage.setItem(
+        "token",
+        LoginData?.data?.token?.replace("Bearer ", "")
+      );
+      push("/dashboard");
+    }
+  }, [isLoginSuccess, LoginData]);
+
+  useEffect(() => {
+    if (isLoginError) {
+      enqueueSnackbar("L'email ou le mot de passe est incorrecte", {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
+    }
+  }, [isLoginError]);
 
   const loginClasses = useStylesLogin();
   const ButtonClasses = useStylesButton();

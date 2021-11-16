@@ -20,6 +20,10 @@ export const useStylesButton: any = makeStyles((theme: Theme) =>
         }),
       },
     },
+    ActionsButton: {
+      border: "none",
+      padding: "0px",
+    },
     BlueButton: {
       textTransform: "none",
       padding: "6px 10px ",

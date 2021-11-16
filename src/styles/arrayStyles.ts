@@ -211,5 +211,8 @@ export const useStylesTable = makeStyles(() =>
       top: 20,
       width: 1,
     },
+    fixed_width_table_column: {
+      width: "70px",
+    },
   })
 );

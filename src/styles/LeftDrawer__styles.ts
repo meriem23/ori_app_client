@@ -163,12 +163,16 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
     // },
     menu_icon_container: {
       marginRight: "10px",
+      marginLeft: "4px",
 
       "& svg": {
-        fill: "#53596C",
-        height: "20px",
-        width: "22px",
-        transform: "translateY(2px)",
+        fill: "#53596C !important",
+        height: "24px",
+        width: "26px",
+        // transform: "translateY(2px)",
+      },
+      "& text": {
+        fill: "#53596C !important",
       },
     },
     navbar_content_container: {
@@ -183,7 +187,7 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
         alignSelf: "right",
 
         "& .icon_container": {
-          margin: "0 8px",
+          margin: "0 14px",
           cursor: "pointer",
         },
         "& .loop_icon_container": {
@@ -194,6 +198,7 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
           },
         },
         "& .flag_icon_container": {
+          marginRight: "20px",
           "& svg": {
             fill: "#53596C",
             height: "20px",
@@ -201,6 +206,7 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
           },
         },
         "& .onoff_icon_container": {
+          marginRight: "25px",
           "& svg": {
             fill: "#53596C",
             height: "26px",
@@ -325,7 +331,7 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
     },
     // necessary for content to be below app bar
     toolbar: {
-      minHeight: `50px`,
+      minHeight: `75px`,
       // ["@media (max-width:1366px)"]: {
       //   minHeight: `64px`,
       // },
@@ -387,6 +393,16 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
       maxHeight: "1.4em",
       maxWidth: "1.4em",
       cursor: "pointer",
+    },
+    navbar_left_side: {
+      display: "flex",
+      alignItems: "center",
+    },
+    breadcrumb_value: {
+      padding: "6px 10px",
+      borderRadius: "4px",
+      fontWeight: 500,
+      backgroundColor: "#e6f4ff",
     },
   })
 );
