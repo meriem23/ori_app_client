@@ -8,7 +8,7 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 // component imports
 import {
@@ -17,6 +17,7 @@ import {
   Theme,
   createStyles,
   Button,
+  Breadcrumbs,
 } from "@material-ui/core";
 import MenuList from "./MenuList";
 import SearchInput from "./SearchInput";
@@ -34,6 +35,7 @@ import Bell from "../../icons/Bell";
 import Flag from "../../icons/Flag";
 import { formStyles } from "../../styles/formStyles";
 import { useStylesButton } from "../../styles/buttonStyles";
+import BlueArrow from "../../icons/BlueArrow";
 
 interface Props {
   /**
@@ -141,37 +143,56 @@ export default function ResponsiveDrawer(props: Props) {
 
   const buttonClasses = useStylesButton();
 
+  const { pathname } = useLocation();
+  const { push } = useHistory();
+
+  const pathnames = pathname.split("/").filter((el, i) => el && i < 4);
+  console.log("#pathanmes", pathnames);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={clsx(classes.appBar)} elevation={0}>
         <Toolbar className={classes.navbar}>
-          {/* icon displayed when desktop mode */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={clsx(
-              classes.menuButton
-              // (openDrawer || mobileOpen) && classes.hide
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* icon displayed when mobile mode */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggleMobile}
-            className={clsx(
-              classes.menuButtonMobile
-              // (openDrawer || mobileOpen) && classes.hide
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
+          <div className={classes.navbar_left_side}>
+            {/* icon displayed when desktop mode */}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={clsx(
+                classes.menuButton
+                // (openDrawer || mobileOpen) && classes.hide
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+            {/* icon displayed when mobile mode */}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggleMobile}
+              className={clsx(
+                classes.menuButtonMobile
+                // (openDrawer || mobileOpen) && classes.hide
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <div>
+              <Breadcrumbs separator={<BlueArrow />} aria-label="breadcrumb">
+                {pathnames.map((pathnameValue: string) => (
+                  <p className={classes.breadcrumb_value}>
+                    {pathnameValue.replace("-", " ")}
+                  </p>
+                ))}
+              </Breadcrumbs>
+            </div>
+          </div>
+
           <div className={classes.navbar_content_container}>
             {/* <SearchInput /> */}
             <div className="bell_user_img_container">
@@ -200,8 +221,14 @@ export default function ResponsiveDrawer(props: Props) {
                   // }${user?.avatar}`}
                 />
               </span>
-              <Tooltip title="Sign Out" arrow>
-                <div className="onoff_icon_container icon_container">
+              <Tooltip title="Se déconnecter" arrow>
+                <div
+                  className="onoff_icon_container icon_container"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    push("/login");
+                  }}
+                >
                   <OnOff />{" "}
                 </div>
               </Tooltip>

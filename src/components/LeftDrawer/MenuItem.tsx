@@ -114,6 +114,7 @@ const useStyles = makeStyles((theme) =>
       },
     },
     menuItem: {
+      margin: "10px 0",
       root: {
         margin: "12px 0",
         fontSize: "1em",
@@ -138,7 +139,7 @@ const useStyles = makeStyles((theme) =>
       //   color: theme.palette.action.hover,
       // },
       "& .MuiListItemText-root": {
-        fontSize: "14px",
+        fontSize: "17px",
         fontWeight: 600,
       },
     },

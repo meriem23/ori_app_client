@@ -9,6 +9,8 @@ import Homepage from "./components/Homepage/Homepage";
 import { useState } from "react";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
+import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
+import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ function App() {
               <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
+                <Route exact path="/Recettes" component={RecepiesList} />
+                <Route exact path="/Familles" component={FamiliesList} />
               </ResponsiveDrawer>
             </Switch>
           </Router>

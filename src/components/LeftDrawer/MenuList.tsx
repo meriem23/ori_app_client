@@ -7,6 +7,9 @@ import MenuItem from "./MenuItem";
 import clsx from "clsx";
 import { CircularProgress } from "@material-ui/core";
 import { AiOutlineHome } from "react-icons/ai";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { RiDashboardLine } from "react-icons/ri";
+import { FaLayerGroup } from "react-icons/fa";
 import Setup from "../../icons/Setup";
 import Bag from "../../icons/Bag";
 import ReportFile from "../../icons/ReportFile";
@@ -27,33 +30,33 @@ const MenuComp = () => {
     {
       name: "Dashboard",
       link: "/dashboard",
-      Icon: <DashBoard />,
+      Icon: <RiDashboardLine />,
     },
     {
-      name: "Recepies",
-      // link: "/dashboard",
-      Icon: <Setup />,
-      items: [
-        {
-          name: "Test1.1",
-          // link: "/setup/roles",
-        },
-        {
-          name: "Test 1.2",
-          // link: "/dashboard/dash2",
-        },
-      ],
+      name: "Ingrédients",
+      link: "/Recettes",
+      Icon: <IoFastFoodOutline />,
+      // items: [
+      //   {
+      //     name: "Test1.1",
+      //     // link: "/setup/roles",
+      //   },
+      //   {
+      //     name: "Test 1.2",
+      //     // link: "/dashboard/dash2",
+      //   },
+      // ],
     },
     {
-      name: "Test 2",
-      // link: "/test",
-      Icon: <Bag />,
+      name: "Familles",
+      link: "/Familles",
+      Icon: <FaLayerGroup />,
     },
-    {
-      name: "Test 3",
-      // link: "/test",
-      Icon: <ReportFile />,
-    },
+    // {
+    //   name: "Test 3",
+    //   // link: "/test",
+    //   Icon: <ReportFile />,
+    // },
   ];
   return (
     <>
