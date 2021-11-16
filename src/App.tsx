@@ -8,6 +8,7 @@ import { theme } from "./theme/customTheme";
 import Homepage from "./components/Homepage/Homepage";
 import { useState } from "react";
 import Login from "./pages/Login";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/login" component={Login} />
+              <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
               </ResponsiveDrawer>

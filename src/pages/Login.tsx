@@ -1,12 +1,7 @@
 import React from "react";
 import LoginIllustration from "../images/loginIllustration";
 import { useStylesLogin } from "../styles/loginStyles";
-import {
-  useForm,
-  FormProvider,
-  useFormContext,
-  useWatch,
-} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import Field from "../components/FormsElements/Field";
 import { Button } from "@material-ui/core";
 
@@ -32,8 +27,7 @@ export default function Login() {
       rules: {
         required: "Ce champ est obligatoire",
         pattern: {
-          value:
-            /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+          value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
           message: "Veuillez saisir un E-mail valide!",
         },
       },

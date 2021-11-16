@@ -35,7 +35,7 @@ export const theme = (dark: boolean) =>
       },
       secondary: {
         light: "#7986cb",
-        main: "#0072BC",
+        main: "#92E3A9",
         dark: "#303f9f",
         contrastText: "#000",
       },
