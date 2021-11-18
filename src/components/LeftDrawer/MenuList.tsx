@@ -5,25 +5,9 @@ import List from "@material-ui/core/List";
 
 import MenuItem from "./MenuItem";
 import clsx from "clsx";
-import { CircularProgress } from "@material-ui/core";
-import { AiOutlineHome } from "react-icons/ai";
-import { IoFastFoodOutline } from "react-icons/io5";
+import { AiOutlineHome, AiOutlineGroup } from "react-icons/ai";
+import { IoFastFoodOutline, IoShapesOutline } from "react-icons/io5";
 import { RiDashboardLine } from "react-icons/ri";
-import { FaLayerGroup } from "react-icons/fa";
-import Setup from "../../icons/Setup";
-import Bag from "../../icons/Bag";
-import ReportFile from "../../icons/ReportFile";
-import DashBoard from "../../icons/DashBoard";
-
-const styles = makeStyles(() =>
-  createStyles({
-    salonLogo: {
-      "& path": {
-        stroke: "white",
-      },
-    },
-  })
-);
 
 const MenuComp = () => {
   const appMenuItemsAdherent = [
@@ -41,22 +25,18 @@ const MenuComp = () => {
       //     name: "Test1.1",
       //     // link: "/setup/roles",
       //   },
-      //   {
-      //     name: "Test 1.2",
-      //     // link: "/dashboard/dash2",
-      //   },
       // ],
     },
     {
       name: "Familles",
       link: "/Familles",
-      Icon: <FaLayerGroup />,
+      Icon: <AiOutlineGroup />,
     },
-    // {
-    //   name: "Test 3",
-    //   // link: "/test",
-    //   Icon: <ReportFile />,
-    // },
+    {
+      name: "Formes",
+      link: "/Formes",
+      Icon: <IoShapesOutline />,
+    },
   ];
   return (
     <>

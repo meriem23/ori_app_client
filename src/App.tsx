@@ -10,6 +10,8 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
 import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
+import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -23,10 +25,12 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
                 <Route exact path="/Recettes" component={RecepiesList} />
                 <Route exact path="/Familles" component={FamiliesList} />
+                <Route exact path="/Formes" component={ShapesList} />
               </ResponsiveDrawer>
             </Switch>
           </Router>

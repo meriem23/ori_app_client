@@ -15,20 +15,47 @@ import { login } from "../services/authServices";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
 
-export default function Login() {
-  interface FormLoginSchema {
+export default function Register() {
+  interface FormRegisterSchema {
+    name: string;
     email: string;
     password: string;
+    verifPassword: string;
   }
 
-  const methods = useForm<FormLoginSchema>({
+  const methods = useForm<FormRegisterSchema>({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      verifPassword: "",
     },
   });
 
+  const passwordValue = useWatch({
+    control: methods.control,
+    name: "password",
+  });
+
+  const validatePasswordValue = useWatch({
+    control: methods.control,
+    name: "password",
+  });
+
   const formInputs = [
+    {
+      type: "text",
+      name: "name",
+      label: "Nom et prénom",
+      disabled: false,
+      rules: {
+        required: "Ce champ est obligatoire",
+        minLength: {
+          value: 4,
+          message: "Le nom doit contenir au moins 4 caractéres",
+        },
+      },
+    },
     {
       type: "text",
       name: "email",
@@ -38,7 +65,7 @@ export default function Login() {
         required: "Ce champ est obligatoire",
         pattern: {
           value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-          message: "Veuillez saisir un E-mail valide!",
+          message: "Veuillez saisir un E-mail valide",
         },
       },
     },
@@ -54,6 +81,22 @@ export default function Login() {
           value: 6,
           message: "Le mot de passe doit contenir au moins 6 caractéres",
         },
+        validate: (value: any) => value === validatePasswordValue,
+      },
+    },
+    {
+      type: "text",
+      name: "verifPassword",
+      label: "vérification mot de passe",
+      disabled: false,
+      typeValue: "password",
+      rules: {
+        required: "Ce champ est obligatoire",
+        minLength: {
+          value: 6,
+          message: "Le mot de passe doit contenir au moins 6 caractéres",
+        },
+        validate: (value: any) => value === passwordValue || "doit",
       },
     },
   ];
@@ -68,7 +111,7 @@ export default function Login() {
   } = useMutation(login);
 
   const onSubmit = (data: any) => {
-    LoginMutateAsync(data);
+    // LoginMutateAsync(data);
     console.log(data);
   };
 
@@ -113,14 +156,14 @@ export default function Login() {
         <div className={loginClasses.login_form_content}>
           <p className={loginClasses.login_form_title}>Bienvenue</p>
           <p className={loginClasses.login_form_message_type}>
-            Vous n'avez pas de compte ?{" "}
+            Déja un membre ?{" "}
             <span
               onClick={() => {
-                push("/register");
+                push("/login");
               }}
             >
               {" "}
-              Créez un compte
+              Connectez-vous
             </span>
           </p>
           <div className={loginClasses.login_form_content_seperator_container}>
@@ -139,7 +182,7 @@ export default function Login() {
                 <Field name={el.name} {...el} />
               ))}
               <Button type="submit" className={ButtonClasses.BigBlueButton}>
-                Se Connecter
+                S'inscrire
               </Button>
             </form>
           </FormProvider>

@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import axiosInstance from "../../config/axios-instance";
 
-export const useGetIngredients = () =>
+export const useGetShapes = () =>
   useQuery(
-    ["ingredients"],
+    ["Shapes"],
     async () => {
-      let url = "http://localhost:5000/api/ingredient";
+      let url = "http://localhost:5000/api/shape";
 
       let token = localStorage.getItem("token");
       // console.log(token);
@@ -40,11 +40,11 @@ export const AddIngredient = (data: any) => {
 };
 
 //delete
-export const DeleteIngredient = (id: string) => {
+export const DeleteShape = (id: string) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "delete",
-    url: `http://localhost:5000/api/ingredient/${id}`,
+    url: `http://localhost:5000/api/shape/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
