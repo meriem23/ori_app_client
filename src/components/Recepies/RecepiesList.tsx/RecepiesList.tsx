@@ -17,15 +17,6 @@ const RecepiesList = () => {
 
   const [headCells, setHeadCells] = useState<HeadCell[]>([
     {
-      id: "_id",
-      numeric: false,
-      disablePadding: true,
-      label: "Code Ingredient",
-      show: true,
-      value: "_id",
-      checked: true,
-    },
-    {
       id: "name",
       numeric: false,
       disablePadding: true,
@@ -50,6 +41,15 @@ const RecepiesList = () => {
       label: "Forme",
       show: true,
       value: "shape",
+      checked: true,
+    },
+    {
+      id: "actions",
+      numeric: false,
+      disablePadding: true,
+      label: "Actions",
+      show: true,
+      value: "actions",
       checked: true,
     },
   ]);

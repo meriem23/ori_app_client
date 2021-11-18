@@ -6,12 +6,12 @@ export const useStylesButton: any = makeStyles((theme: Theme) =>
   createStyles({
     BigBlueButton: {
       textTransform: "none",
-      padding: "8px 24px ",
-      fontSize: "1.1em",
-      width: "fit-content ",
-      minWidth: "6em",
-      backgroundColor: `${theme.palette.secondary.main} `,
-      color: "white ",
+      padding: "8px 24px !important",
+      fontSize: "1.1em !important",
+      width: "fit-content !important",
+      minWidth: "6em !important",
+      backgroundColor: `${theme.palette.secondary.main} !important`,
+      color: "white !important",
       fontWeight: 600,
       "&:hover": {
         backgroundColor: hexRgb(theme.palette.secondary.main, {
@@ -21,7 +21,7 @@ export const useStylesButton: any = makeStyles((theme: Theme) =>
       },
     },
     ActionsButton: {
-      border: "none",
+      border: "none !important",
       padding: "0px",
     },
     BlueButton: {

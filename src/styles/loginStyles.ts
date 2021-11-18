@@ -61,9 +61,11 @@ export const useStylesLogin: any = makeStyles(() =>
     login_form_message_type: {
       fontSize: "18px",
       textAlign: "center",
+
       "& span": {
         fontWeight: 500,
         textDecoration: "underline",
+        cursor: "pointer !important",
       },
     },
     login_form_content_seperator_text: {
@@ -76,12 +78,16 @@ export const useStylesLogin: any = makeStyles(() =>
       "& .MuiFormControl-root": {
         width: "100%",
       },
+      "& button": {
+        textTransform: "none !important",
+      },
     },
     contact_text: {
       textAlign: "center",
       fontWeight: 500,
       fontSize: "18px",
       textDecoration: "underline",
+      cursor: "pointer !important",
     },
   })
 );

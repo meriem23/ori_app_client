@@ -79,14 +79,14 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "Select all roles" }}
           />
-        </TableCell>
+        </TableCell> */}
         {headCells
           .filter((row: any) => row.checked)
           .map((headCell: any) => (
@@ -112,7 +112,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               </TableSortLabel>
             </TableCell>
           ))}
-        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -165,7 +164,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Roles
+          Liste des Familles
         </Typography>
       )}
       {/* if any elements are selected in the table -> show button for any action */}
@@ -302,22 +301,6 @@ const MuiTableRow = ({
       key={Family._id}
       selected={isItemSelected}
     >
-      <TableCell padding="checkbox">
-        <Checkbox
-          checked={isItemSelected}
-          inputProps={{ "aria-labelledby": labelId }}
-          onClick={(event: any) => handleClick(event, Family._id)}
-        />
-      </TableCell>
-      {headCells.filter((el: any) => el.id === "_id")[0]?.checked && (
-        <TableCell component="th" id={labelId} scope="row" padding="none">
-          {Family._id ? (
-            Family._id
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
       {headCells.filter((el: any) => el.id === "name")[0]?.checked && (
         <TableCell>
           {Family.name ? (
@@ -517,13 +500,14 @@ export default function RecepiesListEnhancedTable({
               headCells={headCells}
             />
             <TableBody>
-              {stableSort(familiesData, getComparator(order, orderBy))
+              {/* {stableSort(familiesData, getComparator(order, orderBy)) */}
+              {familiesData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((role, index) => {
+                .map((family: any, index: any) => {
                   return (
                     <MuiTableRow
                       index={index}
-                      Family={role}
+                      Family={family}
                       isSelected={isSelected}
                       handleClick={handleClick}
                       key={index}

@@ -45,10 +45,6 @@ export default function Login() {
       typeValue: "password",
       rules: {
         required: "Ce champ est obligatoire",
-        minLength: {
-          value: 6,
-          message: "Le mot de passe doit contenir au moins 6 caractéres",
-        },
       },
     },
   ];
@@ -79,6 +75,16 @@ export default function Login() {
         LoginData?.data?.token?.replace("Bearer ", "")
       );
       push("/dashboard");
+      enqueueSnackbar("Bienvenue", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
     }
   }, [isLoginSuccess, LoginData]);
 
@@ -138,7 +144,12 @@ export default function Login() {
               </Button>
             </form>
           </FormProvider>
-          <p className={loginClasses.contact_text}>Contactez-nous</p>
+          <p
+            className={loginClasses.contact_text}
+            onClick={() => push("/contact")}
+          >
+            Contactez-nous
+          </p>
         </div>
       </div>
     </div>

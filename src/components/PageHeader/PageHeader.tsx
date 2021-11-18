@@ -23,14 +23,15 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <div className={classesHeader.root}>
       <span className={classesHeader.title}> {titleValue} </span>
-      <Link to={buttonLink}>
-        <Button
-          className={clsx(ButtonClasses.BlueButton, classesHeader.main_button)}
-          startIcon={children}
-        >
-          {buttonText}
-        </Button>
-      </Link>
+      {/* <Link to={buttonLink} > */}
+      <Button
+        className={clsx(ButtonClasses.BlueButton, classesHeader.main_button)}
+        startIcon={children}
+        disabled={true}
+      >
+        {buttonText}
+      </Button>
+      {/* </Link> */}
     </div>
   );
 };

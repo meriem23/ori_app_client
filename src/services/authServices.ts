@@ -26,3 +26,22 @@ export const getUser = () => {
     },
   });
 };
+//get user data
+export const registerUser = (data: any) => {
+  const { name, password, email } = data;
+  let token = localStorage.getItem("token");
+  return axiosInstance({
+    method: "post",
+    url: "http://localhost:5000/api/users/register-user",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data: {
+      name,
+      password,
+      email,
+    },
+  });
+};

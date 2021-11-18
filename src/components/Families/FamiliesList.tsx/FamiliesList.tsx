@@ -18,15 +18,6 @@ const FamiliesList = () => {
 
   const [headCells, setHeadCells] = useState<HeadCell[]>([
     {
-      id: "_id",
-      numeric: false,
-      disablePadding: true,
-      label: "Code Famille",
-      show: true,
-      value: "_id",
-      checked: true,
-    },
-    {
       id: "name",
       numeric: false,
       disablePadding: true,
@@ -39,9 +30,18 @@ const FamiliesList = () => {
       id: "description",
       numeric: false,
       disablePadding: false,
-      label: "Description famille",
+      label: "Description Famille",
       show: true,
       value: "description",
+      checked: true,
+    },
+    {
+      id: "actions",
+      numeric: false,
+      disablePadding: false,
+      label: "Actions",
+      show: true,
+      value: "actions",
       checked: true,
     },
   ]);

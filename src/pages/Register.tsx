@@ -11,7 +11,7 @@ import Field from "../components/FormsElements/Field";
 import { Button } from "@material-ui/core";
 import { useStylesButton } from "../styles/buttonStyles";
 import { useMutation } from "react-query";
-import { login } from "../services/authServices";
+import { login, registerUser } from "../services/authServices";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
 
@@ -96,22 +96,23 @@ export default function Register() {
           value: 6,
           message: "Le mot de passe doit contenir au moins 6 caractéres",
         },
-        validate: (value: any) => value === passwordValue || "doit",
+        validate: (value: any) =>
+          value === passwordValue || "les mots de passe ne correspondent pas",
       },
     },
   ];
 
   const {
-    mutateAsync: LoginMutateAsync,
-    isSuccess: isLoginSuccess,
-    data: LoginData,
-    isError: isLoginError,
-    isLoading: isLoadingLogin,
-    reset: resetLogin,
-  } = useMutation(login);
+    mutateAsync: RegisterMutateAsync,
+    isSuccess: isRegisterSuccess,
+    data: RegisterData,
+    isError: isRegisterError,
+    isLoading: isLoadingRegister,
+    reset: resetRegister,
+  } = useMutation(registerUser);
 
   const onSubmit = (data: any) => {
-    // LoginMutateAsync(data);
+    RegisterMutateAsync(data);
     console.log(data);
   };
 
@@ -120,18 +121,24 @@ export default function Register() {
   const { push } = useHistory();
 
   useEffect(() => {
-    if (isLoginSuccess && LoginData) {
+    if (isRegisterSuccess && RegisterData) {
       // @ts-ignore
-      localStorage.setItem(
-        "token",
-        LoginData?.data?.token?.replace("Bearer ", "")
-      );
-      push("/dashboard");
+      enqueueSnackbar("Compte créé avec succès", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
+      push("/login");
     }
-  }, [isLoginSuccess, LoginData]);
+  }, [isRegisterSuccess, RegisterData]);
 
   useEffect(() => {
-    if (isLoginError) {
+    if (isRegisterError) {
       enqueueSnackbar("L'email ou le mot de passe est incorrecte", {
         variant: "error",
         anchorOrigin: {
@@ -143,7 +150,7 @@ export default function Register() {
         closeSnackbar();
       }, 5000);
     }
-  }, [isLoginError]);
+  }, [isRegisterError]);
 
   const loginClasses = useStylesLogin();
   const ButtonClasses = useStylesButton();
@@ -186,7 +193,12 @@ export default function Register() {
               </Button>
             </form>
           </FormProvider>
-          <p className={loginClasses.contact_text}>Contactez-nous</p>
+          <p
+            onClick={() => push("/contact")}
+            className={loginClasses.contact_text}
+          >
+            Contactez-nous
+          </p>
         </div>
       </div>
     </div>

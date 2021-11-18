@@ -36,7 +36,7 @@ export const useStylesTextField: any = makeStyles(() =>
       "& .MuiFormLabel-root": {
         color: "#000",
         fontWeight: "500 !important",
-        fontSize: 14,
+        fontSize: 16,
       },
       "& $notchedOutline": {
         borderColor: "#B0B0B0",

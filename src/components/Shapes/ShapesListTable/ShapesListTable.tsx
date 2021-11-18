@@ -78,14 +78,14 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "Select all roles" }}
           />
-        </TableCell>
+        </TableCell> */}
         {headCells
           .filter((row: any) => row.checked)
           .map((headCell: any) => (
@@ -111,7 +111,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               </TableSortLabel>
             </TableCell>
           ))}
-        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -164,7 +163,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Roles
+          Listes des Formes
         </Typography>
       )}
       {/* if any elements are selected in the table -> show button for any action */}
@@ -301,13 +300,13 @@ const MuiTableRow = ({
       key={data._id}
       selected={isItemSelected}
     >
-      <TableCell padding="checkbox">
+      {/* <TableCell padding="checkbox">
         <Checkbox
           checked={isItemSelected}
           inputProps={{ "aria-labelledby": labelId }}
           onClick={(event: any) => handleClick(event, data._id)}
         />
-      </TableCell>
+      </TableCell> */}
       {headCells.filter((el: any) => el.id === "_id")[0]?.checked && (
         <TableCell component="th" id={labelId} scope="row" padding="none">
           {data._id ? data._id : <span style={{ fontWeight: 700 }}>--</span>}
@@ -509,9 +508,10 @@ export default function RecepiesListEnhancedTable({
               headCells={headCells}
             />
             <TableBody>
-              {stableSort(shapesData, getComparator(order, orderBy))
+              {/* {stableSort(shapesData, getComparator(order, orderBy)) */}
+              {shapesData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((shape, index) => {
+                .map((shape: any, index: any) => {
                   return (
                     <MuiTableRow
                       index={index}
