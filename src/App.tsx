@@ -1,3 +1,4 @@
+import React from "react"
 import ResponsiveDrawer from "./components/LeftDrawer/LeftDrawer";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -8,6 +9,7 @@ import { theme } from "./theme/customTheme";
 import Homepage from "./components/Homepage/Homepage";
 import { useState } from "react";
 import Login from "./pages/Login";
+import Contact from "./pages/Contact";
 import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
 import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
 import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
@@ -26,6 +28,7 @@ function App() {
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
                 <Route exact path="/Recettes" component={RecepiesList} />

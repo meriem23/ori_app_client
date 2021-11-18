@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import LoginIllustration from "../images/loginIllustration";
 import { useStylesLogin } from "../styles/loginStyles";
-import {
-  useForm,
-  FormProvider,
-  useFormContext,
-  useWatch,
-} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import Field from "../components/FormsElements/Field";
 import { Button } from "@material-ui/core";
 import { useStylesButton } from "../styles/buttonStyles";
