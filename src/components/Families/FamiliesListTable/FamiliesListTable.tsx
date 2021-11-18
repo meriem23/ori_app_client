@@ -336,11 +336,6 @@ const MuiTableRow = ({
           )}
         </TableCell>
       )}
-      {/* {headCells.filter((el: any) => el.id === "rol_Approval_N")[0].checked && (
-        <TableCell>
-          {Family.rol_Approval_N === "1" ? "active" : "Inactive"}
-        </TableCell>
-      )} */}
       <TableCell className={tableClasses.fixed_width_table_column}>
         <button
           onClick={handleClickMenu}
@@ -407,6 +402,7 @@ const MuiTableRow = ({
             onClick={() => handleDeleteFamily(Family._id)}
             color="primary"
             autoFocus
+            disabled={isMutatingDeleteFamily}
           >
             Supprimer
           </Button>

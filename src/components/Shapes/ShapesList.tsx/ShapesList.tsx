@@ -1,6 +1,7 @@
 import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
+import { useGetShapes } from "../../../services/shapesServices/shapesServices";
 import PageHeader from "../../PageHeader/PageHeader";
 import ShapesListEnhancedTable from "../ShapesListTable/ShapesListTable";
 
@@ -20,7 +21,7 @@ const ShapesList = () => {
       id: "_id",
       numeric: false,
       disablePadding: true,
-      label: "Code Ingredient",
+      label: "Code Forme",
       show: true,
       value: "_id",
       checked: true,
@@ -29,47 +30,39 @@ const ShapesList = () => {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Nom Ingredient",
+      label: "Nom Forme",
       show: true,
       value: "name",
       checked: true,
     },
     {
-      id: "family",
+      id: "description",
       numeric: false,
       disablePadding: false,
-      label: "Famille",
+      label: "Description Forme",
       show: true,
-      value: "family",
-      checked: true,
-    },
-    {
-      id: "shape",
-      numeric: false,
-      disablePadding: false,
-      label: "Forme",
-      show: true,
-      value: "shape",
+      value: "description",
       checked: true,
     },
   ]);
-  const {
-    data: recepiesData,
-    isLoading: isLoadingRecepies,
-    isSuccess: isSuccessRecepies,
-    refetch: refetchIngredients,
-  } = useGetIngredients();
 
-  console.log("#recepiesData", recepiesData);
+  const {
+    data: shapesData,
+    isLoading: isLoadingShapes,
+    isSuccess: isSuccessShapes,
+    refetch: refetchShapes,
+  } = useGetShapes();
+
+  console.log("#shapesData", shapesData);
 
   return (
     <div>
       <PageHeader
-        buttonLink="/Ingredients/Ajout-Ingredient"
-        buttonText="Ajouter une Ingredient"
-        titleValue="Ingredients"
+        buttonLink="/Formes/Ajout-forme"
+        buttonText="Ajouter une forme"
+        titleValue="Formes"
       />
-      {isLoadingRecepies ? (
+      {isLoadingShapes ? (
         <div style={{ width: "100%", position: "relative" }}>
           <div
             style={{
@@ -84,7 +77,7 @@ const ShapesList = () => {
         </div>
       ) : (
         <ShapesListEnhancedTable
-          recepiesData={recepiesData}
+          shapesData={shapesData}
           headCells={headCells}
         />
         // <div>data</div>

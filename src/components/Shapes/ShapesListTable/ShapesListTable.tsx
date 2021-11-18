@@ -40,7 +40,7 @@ import Trash from "../../../icons/Trash";
 import { getComparator, stableSort } from "../../../utils/tableFunctions";
 import { useToolbarStyles } from "../../../styles/TollbarStyles";
 import { useStylesMenu } from "../../../styles/menuStyles";
-import { DeleteIngredient } from "../../../services/IngredientsServices/ingredientServices";
+import { DeleteShape } from "../../../services/shapesServices/shapesServices";
 
 // import { useStylesMenu } from "../../../styles/menuStyles";
 // import { useToolbarStyles } from "../../../styles/TollbarStyles";
@@ -212,7 +212,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface MuiTableRowProps {
-  Ingredient: any;
+  data: any;
   index: number;
   handleClick: any;
   isSelected: any;
@@ -220,7 +220,7 @@ interface MuiTableRowProps {
 }
 
 const MuiTableRow = ({
-  Ingredient,
+  data,
   index,
   isSelected,
   handleClick,
@@ -233,7 +233,7 @@ const MuiTableRow = ({
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const isItemSelected = isSelected(Ingredient._id);
+  const isItemSelected = isSelected(data._id);
   const labelId = `enhanced-table-checkbox-${index}`;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -243,10 +243,10 @@ const MuiTableRow = ({
   };
 
   const {
-    mutateAsync: deleteIngredient,
-    isLoading: isMutatingDeleteIngredient,
-    isSuccess: isSuccessDeleteIngredient,
-  } = useMutation(DeleteIngredient);
+    mutateAsync: deleteShape,
+    isLoading: isMutatingDeleteShape,
+    isSuccess: isSuccessDeleteShape,
+  } = useMutation(DeleteShape);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -262,16 +262,16 @@ const MuiTableRow = ({
     setOpen(false);
   };
 
-  const handleDeleteIngredient = (idIngredient: string) => {
+  const handleDeleteShape = (idIngredient: string) => {
     console.log("#idIngredient", idIngredient);
 
-    deleteIngredient(idIngredient);
+    deleteShape(idIngredient);
   };
 
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (isSuccessDeleteIngredient) {
+    if (isSuccessDeleteShape) {
       setOpen(false);
 
       enqueueSnackbar("Ingrédient supprimé avec succès", {
@@ -282,15 +282,15 @@ const MuiTableRow = ({
         },
       });
 
-      queryClient.refetchQueries("ingredients");
+      queryClient.refetchQueries("datas");
 
       setTimeout(() => {
         closeSnackbar();
       }, 5000);
     }
-  }, [isSuccessDeleteIngredient]);
+  }, [isSuccessDeleteShape]);
 
-  console.log("#Ingredient ", Ingredient);
+  console.log("#Ingredient ", data);
   return (
     <TableRow
       hover
@@ -298,57 +298,35 @@ const MuiTableRow = ({
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
-      key={Ingredient._id}
+      key={data._id}
       selected={isItemSelected}
     >
       <TableCell padding="checkbox">
         <Checkbox
           checked={isItemSelected}
           inputProps={{ "aria-labelledby": labelId }}
-          onClick={(event: any) => handleClick(event, Ingredient._id)}
+          onClick={(event: any) => handleClick(event, data._id)}
         />
       </TableCell>
       {headCells.filter((el: any) => el.id === "_id")[0]?.checked && (
         <TableCell component="th" id={labelId} scope="row" padding="none">
-          {Ingredient._id ? (
-            Ingredient._id
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
+          {data._id ? data._id : <span style={{ fontWeight: 700 }}>--</span>}
         </TableCell>
       )}
       {headCells.filter((el: any) => el.id === "name")[0]?.checked && (
         <TableCell>
-          {Ingredient.name ? (
-            Ingredient.name
+          {data.name ? data.name : <span style={{ fontWeight: 700 }}>--</span>}
+        </TableCell>
+      )}
+      {headCells.filter((el: any) => el.id === "description")[0]?.checked && (
+        <TableCell>
+          {data?.description ? (
+            data?.description
           ) : (
             <span style={{ fontWeight: 700 }}>--</span>
           )}
         </TableCell>
       )}
-      {headCells.filter((el: any) => el.id === "family")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.family ? (
-            Ingredient?.family?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {headCells.filter((el: any) => el.id === "shape")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.shape ? (
-            Ingredient?.shape?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {/* {headCells.filter((el: any) => el.id === "rol_Approval_N")[0].checked && (
-        <TableCell>
-          {Ingredient.rol_Approval_N === "1" ? "active" : "Inactive"}
-        </TableCell>
-      )} */}
       <TableCell className={tableClasses.fixed_width_table_column}>
         <button
           onClick={handleClickMenu}
@@ -396,13 +374,11 @@ const MuiTableRow = ({
       >
         <DialogTitle className={DialogClasses.alert_dialog_title}>
           <Trash />
-          <span className="alert_dialog_title_text">
-            Supprimer ingrédient ?
-          </span>
+          <span className="alert_dialog_title_text">Supprimer Forme ?</span>
         </DialogTitle>
         <DialogContent className={DialogClasses.alert_dialog_content}>
           <DialogContentText>
-            êtes vous sur de supprimer cet ingrédient ?
+            êtes vous sur de supprimer cette forme ?
           </DialogContentText>
         </DialogContent>
         <DialogActions className={DialogClasses.alert_dialog_actions}>
@@ -415,9 +391,10 @@ const MuiTableRow = ({
           </Button>
           <Button
             className={clsx(ButtonClasses.RedButton)}
-            onClick={() => handleDeleteIngredient(Ingredient._id)}
+            onClick={() => handleDeleteShape(data._id)}
             color="primary"
             autoFocus
+            disabled={isMutatingDeleteShape}
           >
             Supprimer
           </Button>
@@ -428,12 +405,12 @@ const MuiTableRow = ({
 };
 
 interface PropsRolesListEnhancedTable {
-  recepiesData: any;
+  shapesData: any;
   headCells: any;
 }
 
 export default function RecepiesListEnhancedTable({
-  recepiesData,
+  shapesData,
   headCells,
 }: PropsRolesListEnhancedTable) {
   const classes = useStyles();
@@ -457,7 +434,7 @@ export default function RecepiesListEnhancedTable({
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = recepiesData.map((n: any) => n._id);
+      const newSelecteds = shapesData.map((n: any) => n._id);
       setSelected(newSelecteds);
       // console.log("#", event.target.checked);
       return;
@@ -506,9 +483,9 @@ export default function RecepiesListEnhancedTable({
 
   const emptyRows =
     rowsPerPage -
-    Math.min(rowsPerPage, recepiesData?.length - page * rowsPerPage);
+    Math.min(rowsPerPage, shapesData?.length - page * rowsPerPage);
 
-  console.log("#recepiesData ---->", recepiesData);
+  console.log("#shapesData ---->", shapesData);
 
   return (
     <div className={classes.root}>
@@ -528,17 +505,17 @@ export default function RecepiesListEnhancedTable({
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={recepiesData?.length}
+              rowCount={shapesData?.length}
               headCells={headCells}
             />
             <TableBody>
-              {stableSort(recepiesData, getComparator(order, orderBy))
+              {stableSort(shapesData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((role, index) => {
+                .map((shape, index) => {
                   return (
                     <MuiTableRow
                       index={index}
-                      Ingredient={role}
+                      data={shape}
                       isSelected={isSelected}
                       handleClick={handleClick}
                       key={index}
@@ -558,7 +535,7 @@ export default function RecepiesListEnhancedTable({
         <TablePagination
           rowsPerPageOptions={[5, 10, 25, 50]}
           component="div"
-          count={recepiesData?.length}
+          count={shapesData?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
