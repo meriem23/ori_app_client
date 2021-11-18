@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import emailjs from "emailjs-com";
 import {
   Input,
@@ -46,45 +46,6 @@ const Contact = () => {
           <p className={contactClasses.contact_form_title}>Contactez-nous</p>
         </div>
         <div>
-          {/* <form onSubmit={sendEmail} >
-            <InputLabel htmlFor="input-with-icon-adornment">
-              Votre Nom
-            </InputLabel>
-            <Input
-              name="name"
-              startAdornment={
-                <InputAdornment position="start">
-                  <MdAccountCircle />
-                </InputAdornment>
-              }
-            />
-            <InputLabel htmlFor="input-with-icon-adornment">
-              Votre Email
-            </InputLabel>
-            <Input
-              name="email"
-              type="email"
-              startAdornment={
-                <InputAdornment position="start">
-                  <MdAlternateEmail />
-                </InputAdornment>
-              }
-            />
-            <TextField
-              name="message"
-              label="Message"
-              placeholder="Enovyez-nous un message"
-              multiline
-              maxRows={60}
-            />
-            <Button
-              variant="contained"
-              // onClick={okMessage}
-             
-            >
-              Envoyer
-            </Button>
-          </form> */}
           <form onSubmit={sendEmail} className={contactClasses.contact_form}>
             <input
               //control={Input}
