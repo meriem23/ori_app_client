@@ -381,6 +381,7 @@ export const LeftDrawer__styles = makeStyles((theme: Theme) =>
       ["@media (max-width:600px)"]: {
         minHeight: `calc(100vh - ${50 + 18}px) `,
       },
+      position: "relative",
     },
     avatar_container: {
       border: "2px solid #53596C",

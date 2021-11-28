@@ -57,7 +57,7 @@ const FamiliesList = () => {
   return (
     <div>
       <PageHeader
-        buttonLink="/Familles/Ajout-famille"
+        buttonLink="/Familles/Ajout_Famille"
         buttonText="Ajouter une famille"
         titleValue="Familles"
       />

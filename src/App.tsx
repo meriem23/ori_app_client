@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import ResponsiveDrawer from "./components/LeftDrawer/LeftDrawer";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -14,6 +14,8 @@ import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
 import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
 import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
 import Register from "./pages/Register";
+import AddFamily from "./components/Families/AddFamilies.tsx/AddFamily";
+import AddFormeForm from "./components/Shapes/AddShape.tsx/AddShape";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +35,17 @@ function App() {
                 <Route exact path="/Dashboard" component={Homepage} />
                 <Route exact path="/Recettes" component={RecepiesList} />
                 <Route exact path="/Familles" component={FamiliesList} />
+                <Route
+                  exact
+                  path="/Familles/Ajout_Famille"
+                  component={AddFamily}
+                />
                 <Route exact path="/Formes" component={ShapesList} />
+                <Route
+                  exact
+                  path="/Formes/Ajout_Forme"
+                  component={AddFormeForm}
+                />
               </ResponsiveDrawer>
             </Switch>
           </Router>

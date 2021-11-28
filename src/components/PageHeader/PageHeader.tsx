@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import clsx from "clsx";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { useStylesButton } from "../../styles/buttonStyles";
 import { useStylesHeader } from "../../styles/headerStyles";
 
@@ -20,6 +20,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
   const classesHeader = useStylesHeader();
   const ButtonClasses = useStylesButton();
+
+  const { push } = useHistory();
   return (
     <div className={classesHeader.root}>
       <span className={classesHeader.title}> {titleValue} </span>
@@ -27,7 +29,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       <Button
         className={clsx(ButtonClasses.BlueButton, classesHeader.main_button)}
         startIcon={children}
-        disabled={true}
+        onClick={() => (buttonLink ? push(buttonLink) : {})}
       >
         {buttonText}
       </Button>

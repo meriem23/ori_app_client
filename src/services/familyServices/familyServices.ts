@@ -25,19 +25,19 @@ export const useGetFamilies = () =>
   );
 
 // //add
-// export const AddIngredient = (data: any) => {
-//   let token = localStorage.getItem("token");
-//   return axiosInstance({
-//     method: "post",
-//     url: "http://localhost:5000/api/ingredient",
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//     data,
-//   });
-// };
+export const AddFamily = (data: any) => {
+  let token = localStorage.getItem("token");
+  return axiosInstance({
+    method: "post",
+    url: "http://localhost:5000/api/family",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data,
+  });
+};
 
 // //delete
 export const DeleteFamily = (id: string) => {

@@ -24,12 +24,12 @@ export const useGetShapes = () =>
     }
   );
 
-//add
-export const AddIngredient = (data: any) => {
+// //add
+export const AddShape = (data: any) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/ingredient",
+    url: "http://localhost:5000/api/shape",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",

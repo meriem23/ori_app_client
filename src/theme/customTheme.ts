@@ -30,7 +30,7 @@ export const theme = (dark: boolean) =>
       primary: {
         light: "white",
         main: "#fff",
-        dark: "#000",
+        dark: "#0072BC",
         contrastText: "#000",
       },
       secondary: {

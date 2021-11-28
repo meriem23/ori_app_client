@@ -58,7 +58,7 @@ const ShapesList = () => {
   return (
     <div>
       <PageHeader
-        buttonLink="/Formes/Ajout-forme"
+        buttonLink="/Formes/Ajout_Forme"
         buttonText="Ajouter une forme"
         titleValue="Formes"
       />
