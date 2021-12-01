@@ -257,6 +257,8 @@ const NutritionInput: FC = () => {
     name: "fact",
   });
 
+  console.log(errors);
+
   return (
     <>
       <Box>
@@ -284,21 +286,29 @@ const NutritionInput: FC = () => {
                   width: "49.3%",
                 }}
               >
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={nutritionTab}
-                  sx={{ width: "100%" }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Facteur nutritionnel"
-                      className={clsx(textFieldClasses.second)}
+                <Controller
+                  name={`fact.${index}.fact__label`}
+                  control={control}
+                  render={({
+                    field: { onChange: Change, value, ref, ...rest },
+                  }) => (
+                    <Autocomplete
+                      {...rest}
+                      freeSolo
+                      disablePortal
+                      options={nutritionTab}
+                      sx={{ width: "100%" }}
+                      onChange={(_, data) => Change(data)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Facteur nutritionnel"
+                          className={clsx(textFieldClasses.second)}
+                        />
+                      )}
                     />
                   )}
-                  {...register(`fact.${index}.fact__label`, {
-                    required: "Saisir un facteur nutritionnel",
-                  })}
+                  rules={{ required: "Choose one of the options" }}
                 />
 
                 <p>{errors?.fact__label?.message}</p>

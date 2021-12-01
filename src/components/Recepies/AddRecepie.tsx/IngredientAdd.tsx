@@ -14,6 +14,10 @@ import { useStylesTextField } from "../../../styles/textFieldStyles";
 import { useStylesButton } from "../../../styles/buttonStyles";
 import { useGetShapes } from "../../../services/shapesServices/shapesServices";
 import { useGetFamilies } from "../../../services/familyServices/familyServices";
+import { AddIngredient } from "../../../services/IngredientsServices/ingredientServices";
+import { useMutation } from "react-query";
+import { useHistory } from "react-router";
+import { useSnackbar } from "notistack";
 
 type igredientProps = {
   name: string;
@@ -58,9 +62,6 @@ const AddIngredients = () => {
     console.log("#dataWatch", dataWatch);
   }, [dataWatch]);
 
-  const onSubmit: SubmitHandler<igredientProps> = (data) =>
-    console.log("#data", data);
-
   const {
     data: shapesData,
     isLoading: isLoadingShapes,
@@ -74,6 +75,55 @@ const AddIngredients = () => {
     isSuccess: isSuccessfamilies,
     refetch: refetchIngredients,
   } = useGetFamilies();
+
+  const {
+    mutateAsync: addIngredientMutateAsync,
+    isSuccess: isaddIngredientSuccess,
+    data: addIngredientData,
+    isError: isaddIngredientError,
+    isLoading: isLoadingaddIngredient,
+    reset: resetaddIngredient,
+  } = useMutation(AddIngredient);
+
+  const onSubmit: SubmitHandler<igredientProps> = (data) => {
+    console.log("#data", data);
+    addIngredientMutateAsync(data);
+  };
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const { push } = useHistory();
+
+  useEffect(() => {
+    if (isaddIngredientSuccess && addIngredientData) {
+      enqueueSnackbar("ingrédient ajoutée avec succès.", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      push("/Ingredients");
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
+    }
+  }, [isaddIngredientSuccess, addIngredientData]);
+
+  useEffect(() => {
+    if (isaddIngredientError) {
+      enqueueSnackbar("Une erreur est survenue! veuillez réessayer.", {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      setTimeout(() => {
+        closeSnackbar();
+      }, 5000);
+    }
+  }, [isaddIngredientError]);
 
   return (
     <div className={ShapeClasses.add_form_container}>
@@ -115,7 +165,7 @@ const AddIngredients = () => {
                   freeSolo
                   options={shapesData ? shapesData : []}
                   disableCloseOnSelect
-                  onChange={(_, data) => Change(data)}
+                  onChange={(_, data) => Change(data._id)}
                   getOptionLabel={(option: any) => option.name}
                   // placeholder="Nationality"
                   renderInput={(params) => (
@@ -146,7 +196,7 @@ const AddIngredients = () => {
                   freeSolo
                   options={familiesData ? familiesData : []}
                   disableCloseOnSelect
-                  onChange={(_, data) => Change(data)}
+                  onChange={(_, data) => Change(data._id)}
                   getOptionLabel={(option: any) => option.name}
                   // placeholder="Nationality"
                   renderInput={(params) => (
