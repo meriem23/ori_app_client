@@ -16,6 +16,7 @@ import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
 import Register from "./pages/Register";
 import AddFamily from "./components/Families/AddFamilies.tsx/AddFamily";
 import AddFormeForm from "./components/Shapes/AddShape.tsx/AddShape";
+import AddIngredients from "./components/Recepies/AddRecepie.tsx/IngredientAdd";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +34,12 @@ function App() {
               <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
-                <Route exact path="/Recettes" component={RecepiesList} />
+                <Route exact path="/Ingredients" component={RecepiesList} />
+                <Route
+                  exact
+                  path="/Ingredients/Ajout_Ingredient"
+                  component={AddIngredients}
+                />
                 <Route exact path="/Familles" component={FamiliesList} />
                 <Route
                   exact

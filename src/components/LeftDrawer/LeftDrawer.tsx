@@ -8,7 +8,7 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router-dom";
 
 // component imports
 import {
@@ -186,7 +186,7 @@ export default function ResponsiveDrawer(props: Props) {
               <Breadcrumbs separator={<BlueArrow />} aria-label="breadcrumb">
                 {pathnames.map((pathnameValue: string) => (
                   <p className={classes.breadcrumb_value}>
-                    {pathnameValue.replace("-", " ")}
+                    {pathnameValue.replace("-", " ").replace("_", " ")}
                   </p>
                 ))}
               </Breadcrumbs>

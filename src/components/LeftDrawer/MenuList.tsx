@@ -18,7 +18,7 @@ const MenuComp = () => {
     },
     {
       name: "Ingrédients",
-      link: "/Recettes",
+      link: "/Ingredients",
       Icon: <IoFastFoodOutline />,
       // items: [
       //   {

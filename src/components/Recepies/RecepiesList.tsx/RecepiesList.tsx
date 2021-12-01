@@ -65,7 +65,7 @@ const RecepiesList = () => {
   return (
     <div>
       <PageHeader
-        buttonLink="/Ingredients/Ajout-Ingredient"
+        buttonLink="/Ingredients/Ajout_Ingredient"
         buttonText="Ajouter un Ingrédient"
         titleValue="Ingrédients"
       />
