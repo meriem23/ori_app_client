@@ -148,12 +148,14 @@ const AddIngredients = () => {
                 },
               })}
             />
-            <p>{errors?.name?.message}</p>
+            <p className={clsx(textFieldClasses.error)}>
+              {errors?.name?.message}
+            </p>
           </div>
 
           <NutritionInput />
 
-          <Box style={{ padding: "12px 0 8px" }}>
+          <Box style={{ padding: "0px 0 8px" }}>
             <Controller
               name="shape"
               control={control}
@@ -182,9 +184,11 @@ const AddIngredients = () => {
               )}
               rules={{ required: "Veuillez choisir une forme" }}
             />
-            <p>{errors?.shape?.message}</p>
+            <p className={clsx(textFieldClasses.error)}>
+              {errors?.shape?.message}
+            </p>
           </Box>
-          <Box style={{ padding: "12px 0 8px" }}>
+          <Box style={{ padding: "0px 0 8px" }}>
             <Controller
               name="family"
               control={control}
@@ -198,7 +202,6 @@ const AddIngredients = () => {
                   disableCloseOnSelect
                   onChange={(_, data) => Change(data._id)}
                   getOptionLabel={(option: any) => option.name}
-                  // placeholder="Nationality"
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -213,7 +216,9 @@ const AddIngredients = () => {
               )}
               rules={{ required: "Veuillez choisir une famille" }}
             />
-            <p>{errors?.family?.message}</p>
+            <p className={clsx(textFieldClasses.error)}>
+              {errors?.family?.message}
+            </p>
           </Box>
 
           <Button

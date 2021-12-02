@@ -69,11 +69,11 @@ export const useStylesTextField: any = makeStyles(() =>
     },
     error: {
       height: 14,
-      fontSize: "0.9em",
+      fontSize: "16px !important",
       letterSpacing: 0.4,
       color: "crimson",
       marginLeft: "16px !important",
-      marginTop: "3px !important",
+      marginTop: "6px !important",
       marginBottom: 13,
     },
     marginBottom: {

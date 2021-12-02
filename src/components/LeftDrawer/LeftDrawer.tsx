@@ -200,9 +200,6 @@ export default function ResponsiveDrawer(props: Props) {
                 <div className="gold_dot"></div>
                 <Bell />
               </div>
-              <div className="flag_icon_container icon_container">
-                <Flag />
-              </div>
 
               {/* <img className="user_profile_img" src={user?.avatar} alt="user image" /> */}
               <span className={clsx(classes.avatar_container)}>

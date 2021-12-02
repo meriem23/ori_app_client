@@ -9,9 +9,9 @@ export const nutritionInputStyles = makeStyles((theme: Theme) =>
       },
     },
     delete_button: {
-      top: "-8px",
+      top: "-16px",
       right: "-16px",
-      backgroundColor: `#bfbfbf !important`,
+      backgroundColor: `#cecece !important`,
       zIndex: 100,
       padding: "5px !important",
     },
@@ -30,6 +30,7 @@ export const nutritionInputStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       width: "fit-content !important",
       cursor: "pointer",
+      marginBottom: "10px",
     },
     add_nutrition_text: {
       fontWeight: 600,

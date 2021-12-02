@@ -278,7 +278,7 @@ const NutritionInput: FC = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 width: "100%",
-                padding: "12px 0 8px",
+                padding: "0px 0 8px",
               }}
             >
               <Box
