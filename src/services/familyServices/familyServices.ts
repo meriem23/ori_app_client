@@ -5,7 +5,7 @@ export const useGetFamilies = () =>
   useQuery(
     ["families"],
     async () => {
-      let url = "http://localhost:5000/api/family";
+      let url = "https://esra-app-back.herokuapp.com/api/family";
 
       let token = localStorage.getItem("token");
       // console.log(token);
@@ -29,7 +29,7 @@ export const AddFamily = (data: any) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/family",
+    url: "https://esra-app-back.herokuapp.com/api/family",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
@@ -44,7 +44,7 @@ export const DeleteFamily = (id: string) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "delete",
-    url: `http://localhost:5000/api/family/${id}`,
+    url: `https://esra-app-back.herokuapp.com/api/family/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",

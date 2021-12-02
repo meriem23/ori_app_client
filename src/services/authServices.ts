@@ -4,7 +4,7 @@ import axiosInstance from "../config/axios-instance";
 export const login = (data: any) => {
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/users/login-user",
+    url: "https://esra-app-back.herokuapp.com/api/users/login-user",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export const getUser = () => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/users/profile",
+    url: "https://esra-app-back.herokuapp.com/api/users/profile",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
@@ -32,7 +32,7 @@ export const registerUser = (data: any) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/users/register-user",
+    url: "https://esra-app-back.herokuapp.com/api/users/register-user",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",

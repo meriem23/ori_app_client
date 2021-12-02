@@ -5,7 +5,7 @@ export const useGetShapes = () =>
   useQuery(
     ["Shapes"],
     async () => {
-      let url = "http://localhost:5000/api/shape";
+      let url = "https://esra-app-back.herokuapp.com/api/shape";
 
       let token = localStorage.getItem("token");
       // console.log(token);
@@ -29,7 +29,7 @@ export const AddShape = (data: any) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/shape",
+    url: "https://esra-app-back.herokuapp.com/api/shape",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
@@ -44,7 +44,7 @@ export const DeleteShape = (id: string) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "delete",
-    url: `http://localhost:5000/api/shape/${id}`,
+    url: `https://esra-app-back.herokuapp.com/api/shape/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
