@@ -3,7 +3,7 @@ import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { Box, TextField, IconButton, Autocomplete } from "@mui/material";
 import Plus from "../../icons/Plus";
 import clsx from "clsx";
-import ClearIcon from "@mui/icons-material/Clear";
+import ClearIcon from '@mui/icons-material/Clear';
 import { nutritionInputStyles } from "../../styles/nutritionInputStyles";
 import { useStylesTextField } from "../../styles/textFieldStyles";
 

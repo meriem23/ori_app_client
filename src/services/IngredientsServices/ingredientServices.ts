@@ -5,7 +5,7 @@ export const useGetIngredients = () =>
   useQuery(
     ["ingredients"],
     async () => {
-      let url = "http://localhost:5000/api/ingredient";
+      let url = "https://esra-app-back.herokuapp.com/api/ingredient";
 
       let token = localStorage.getItem("token");
       // console.log(token);
@@ -29,7 +29,7 @@ export const AddIngredient = (data: any) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "post",
-    url: "http://localhost:5000/api/ingredient",
+    url: "https://esra-app-back.herokuapp.com/api/ingredient",
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
@@ -44,7 +44,7 @@ export const DeleteIngredient = (id: string) => {
   let token = localStorage.getItem("token");
   return axiosInstance({
     method: "delete",
-    url: `http://localhost:5000/api/ingredient/${id}`,
+    url: `https://esra-app-back.herokuapp.com/api/ingredient/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
