@@ -142,10 +142,6 @@ const AddIngredients = () => {
               }}
               {...register("name", {
                 required: "Saisir le nom de l'ingrédient",
-                // pattern: {
-                //   value: /^[a-zA-Z0-9_.-]*$/,
-                //   message: "Saisir un nom d'ingrédient valide",
-                // },
               })}
             />
             <p className={clsx(textFieldClasses.error)}>

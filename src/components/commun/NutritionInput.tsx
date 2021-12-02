@@ -325,10 +325,6 @@ const NutritionInput: FC = () => {
                   className={clsx(textFieldClasses.second)}
                   {...register(`fact.${index}.fact__quantity`, {
                     required: "Saisir la quantité du facteur nutritionnel",
-                    // pattern: {
-                    //   value: /^[0-9]*$/,
-                    //   message: "Seul les chiffres sont acceptés",
-                    // },
                   })}
                 />
                 <p>{errors?.fact__quantity?.message}</p>
