@@ -2,7 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
 import PageHeader from "../../PageHeader/PageHeader";
-import RecepiesListEnhancedTable from "../RecepiesListTable/RecepiesListTable";
+import RecepiesListEnhancedTable from "../IngredientsListTable/RecepiesListTable";
 
 const RecepiesList = () => {
   interface HeadCell {
@@ -20,7 +20,7 @@ const RecepiesList = () => {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Nom Ingredient",
+      label: "Ingredient",
       show: true,
       value: "name",
       checked: true,

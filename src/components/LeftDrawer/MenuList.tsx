@@ -6,7 +6,11 @@ import List from "@material-ui/core/List";
 import MenuItem from "./MenuItem";
 import clsx from "clsx";
 import { AiOutlineHome, AiOutlineGroup } from "react-icons/ai";
-import { IoFastFoodOutline, IoShapesOutline } from "react-icons/io5";
+import {
+  IoFastFoodOutline,
+  IoShapesOutline,
+  IoNewspaperOutline,
+} from "react-icons/io5";
 import { RiDashboardLine } from "react-icons/ri";
 
 const MenuComp = () => {
@@ -36,6 +40,11 @@ const MenuComp = () => {
       name: "Formes",
       link: "/Formes",
       Icon: <IoShapesOutline />,
+    },
+    {
+      name: "Recettes",
+      link: "/Recettes",
+      Icon: <IoNewspaperOutline />,
     },
   ];
   return (

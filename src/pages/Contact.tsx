@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import {
-  Input,
-  TextField,
-  InputLabel,
-  InputAdornment,
-  Button,
-} from "@mui/material";
-import { MdAccountCircle, MdAlternateEmail } from "react-icons/md";
+import { Button } from "@mui/material";
 import ContactIllistration from "../images/contactIllustration";
 import { useStylesContact } from "../styles/contactStyles";
 import { FormProvider, useForm } from "react-hook-form";
@@ -134,7 +127,7 @@ const Contact = () => {
             className={loginClasses.login_form_title}
           >
             Contactez-nous
-          </p>{" "}
+          </p>
           <FormProvider {...methods}>
             <form
               onSubmit={methods.handleSubmit(sendEmail)}
@@ -149,16 +142,13 @@ const Contact = () => {
                 disabled={loading}
               >
                 <span style={loading ? { marginRight: "8px" } : {}}>
-                  Envoyer{" "}
-                </span>{" "}
+                  Envoyer
+                </span>
                 {loading && <CircularProgress />}
               </Button>
             </form>
           </FormProvider>
-          <p
-            className={loginClasses.contact_text}
-            onClick={() => push("/login")}
-          >
+          <p className={loginClasses.contact_text} onClick={() => push("/")}>
             Se connecter
           </p>
         </div>

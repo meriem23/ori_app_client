@@ -10,14 +10,15 @@ import Homepage from "./components/Homepage/Homepage";
 import { useState } from "react";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
-import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
+import RecepiesList from "./components/Recepies/IngredientsList.tsx/RecepiesList";
 import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
 import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
 import Register from "./pages/Register";
 import AddFamily from "./components/Families/AddFamilies.tsx/AddFamily";
 import AddFormeForm from "./components/Shapes/AddShape.tsx/AddShape";
-import AddIngredients from "./components/Recepies/AddRecepie.tsx/IngredientAdd";
-
+import AddIngredients from "./components/Recepies/AddIngredient.tsx/IngredientAdd";
+import RecipeAdd from "./components/Recepiesp/AddRecepie.tsx/RecipeAdd";
+import RecipesList from "./components/Recepiesp/RecepiesList.tsx/RecepiesList";
 const queryClient = new QueryClient();
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <SnackbarProvider maxSnack={3}>
           <Router>
             <Switch>
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
@@ -51,6 +52,12 @@ function App() {
                   exact
                   path="/Formes/Ajout_Forme"
                   component={AddFormeForm}
+                />
+                <Route exact path="/Recettes" component={RecipesList} />
+                <Route
+                  exact
+                  path="/Recettes/Ajout_Recette"
+                  component={RecipeAdd}
                 />
               </ResponsiveDrawer>
             </Switch>

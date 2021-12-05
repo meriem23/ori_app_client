@@ -223,7 +223,7 @@ export default function ResponsiveDrawer(props: Props) {
                   className="onoff_icon_container icon_container"
                   onClick={() => {
                     localStorage.removeItem("token");
-                    push("/login");
+                    push("/");
                   }}
                 >
                   <OnOff />{" "}

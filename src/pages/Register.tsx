@@ -133,7 +133,7 @@ export default function Register() {
       setTimeout(() => {
         closeSnackbar();
       }, 5000);
-      push("/login");
+      push("/");
     }
   }, [isRegisterSuccess, RegisterData]);
 
@@ -166,7 +166,7 @@ export default function Register() {
             Déja un membre ?{" "}
             <span
               onClick={() => {
-                push("/login");
+                push("/");
               }}
             >
               {" "}
