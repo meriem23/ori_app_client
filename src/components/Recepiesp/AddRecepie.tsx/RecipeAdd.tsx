@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useMutation } from "react-query";
+import { useHistory } from "react-router";
+
 import {
   useForm,
   useWatch,
@@ -6,18 +9,14 @@ import {
   FormProvider,
   Controller,
 } from "react-hook-form";
-import { Box, TextField, Autocomplete, Chip, Button } from "@mui/material";
 import clsx from "clsx";
+import { useSnackbar } from "notistack";
+import { TextField, Button } from "@mui/material";
 import IngredientInput from "../../commun/IngredientInput";
 import { useStylesShape } from "../../../styles/shapeStyles";
 import { useStylesTextField } from "../../../styles/textFieldStyles";
 import { useStylesButton } from "../../../styles/buttonStyles";
-import { useGetShapes } from "../../../services/shapesServices/shapesServices";
-import { useGetFamilies } from "../../../services/familyServices/familyServices";
-import { AddIngredient } from "../../../services/IngredientsServices/ingredientServices";
-import { useMutation } from "react-query";
-import { useHistory } from "react-router";
-import { useSnackbar } from "notistack";
+import { addRecipe } from "../../../services/recipeServices/recipeServices";
 
 type recipeProps = {
   name: string;
@@ -59,33 +58,18 @@ const AddRecipe = () => {
   useEffect(() => {
     console.log("#dataWatch", dataWatch);
   }, [dataWatch]);
-
   const {
-    data: shapesData,
-    isLoading: isLoadingShapes,
-    isSuccess: isSuccessShapes,
-    refetch: refetchShapes,
-  } = useGetShapes();
-
-  const {
-    data: familiesData,
-    isLoading: isLoadingfamilies,
-    isSuccess: isSuccessfamilies,
-    refetch: refetchIngredients,
-  } = useGetFamilies();
-
-  const {
-    mutateAsync: addIngredientMutateAsync,
-    isSuccess: isaddIngredientSuccess,
-    data: addIngredientData,
-    isError: isaddIngredientError,
-    isLoading: isLoadingaddIngredient,
-    reset: resetaddIngredient,
-  } = useMutation(AddIngredient);
+    mutateAsync: addRecipeMutateAsync,
+    isSuccess: isaddRecipeSuccess,
+    data: addRecipeData,
+    isError: isaddRecipeError,
+    isLoading: isLoadingaddRecipe,
+    reset: resetaddRecipe,
+  } = useMutation(addRecipe);
 
   const onSubmit: SubmitHandler<recipeProps> = (data) => {
     console.log("#data", data);
-    addIngredientMutateAsync(data);
+    addRecipeMutateAsync(data);
   };
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -93,23 +77,23 @@ const AddRecipe = () => {
   const { push } = useHistory();
 
   useEffect(() => {
-    if (isaddIngredientSuccess && addIngredientData) {
-      enqueueSnackbar("ingrédient ajoutée avec succès.", {
+    if (isaddRecipeSuccess && addRecipeData) {
+      enqueueSnackbar("recette ajoutée avec succès.", {
         variant: "success",
         anchorOrigin: {
           vertical: "bottom",
           horizontal: "center",
         },
       });
-      push("/Ingredients");
+      push("/Recettes");
       setTimeout(() => {
         closeSnackbar();
       }, 5000);
     }
-  }, [isaddIngredientSuccess, addIngredientData]);
+  }, [isaddRecipeSuccess, addRecipeData]);
 
   useEffect(() => {
-    if (isaddIngredientError) {
+    if (isaddRecipeError) {
       enqueueSnackbar("Une erreur est survenue! veuillez réessayer.", {
         variant: "error",
         anchorOrigin: {
@@ -121,7 +105,7 @@ const AddRecipe = () => {
         closeSnackbar();
       }, 5000);
     }
-  }, [isaddIngredientError]);
+  }, [isaddRecipeError]);
 
   return (
     <div className={ShapeClasses.add_form_container}>
@@ -148,10 +132,10 @@ const AddRecipe = () => {
           <IngredientInput />
           <div className={clsx(textFieldClasses.fieldsMargins)}>
             <TextField
-              id="demo-helper-text-misaligned"
+              multiline
+              rows={6}
               placeholder="Instructions de Cuissons"
               label="Instructions de Cuissons"
-              maxRows={5}
               className={clsx(textFieldClasses.second)}
               sx={{
                 width: "100%",

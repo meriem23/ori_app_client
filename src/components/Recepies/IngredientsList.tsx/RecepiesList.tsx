@@ -1,8 +1,8 @@
-import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
-import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
+import { CircularProgress } from "@material-ui/core";
 import PageHeader from "../../PageHeader/PageHeader";
 import RecepiesListEnhancedTable from "../IngredientsListTable/RecepiesListTable";
+import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
 
 const RecepiesList = () => {
   interface HeadCell {
