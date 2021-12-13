@@ -1,8 +1,8 @@
-import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
-import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
+import { CircularProgress } from "@material-ui/core";
 import PageHeader from "../../PageHeader/PageHeader";
 import RecepiesListEnhancedTable from "../RecepiesListTable/RecepiesListTable";
+import { useGetRecipes } from "../../../services/recipeServices/recipeServices";
 
 const RecepiesList = () => {
   interface HeadCell {
@@ -26,15 +26,6 @@ const RecepiesList = () => {
       checked: true,
     },
     {
-      id: "Ingredients",
-      numeric: false,
-      disablePadding: false,
-      label: "Famille",
-      show: true,
-      value: "family",
-      checked: true,
-    },
-    {
       id: "actions",
       numeric: false,
       disablePadding: true,
@@ -49,10 +40,7 @@ const RecepiesList = () => {
     isLoading: isLoadingRecepies,
     isSuccess: isSuccessRecepies,
     refetch: refetchIngredients,
-  } = useGetIngredients();
-
-  console.log("#recepiesData", recepiesData);
-
+  } = useGetRecipes();
   return (
     <div>
       <PageHeader

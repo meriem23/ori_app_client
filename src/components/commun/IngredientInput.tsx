@@ -1,17 +1,16 @@
 import React, { FC, useState } from "react";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
-import { Box, TextField, IconButton, Autocomplete } from "@mui/material";
-import Plus from "../../icons/Plus";
 import clsx from "clsx";
+import { Box, TextField, IconButton, Autocomplete } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import Plus from "../../icons/Plus";
 import { nutritionInputStyles } from "../../styles/nutritionInputStyles";
 import { useStylesTextField } from "../../styles/textFieldStyles";
+import { useGetIngredients } from "../../services/IngredientsServices/ingredientServices";
 
-const nutritionTab = [{ label: "1", value: "1" }];
 const IngredientInput: FC = () => {
   const nutritionClasses = nutritionInputStyles();
   const textFieldClasses: any = useStylesTextField();
-
   const {
     control,
     register,
@@ -23,8 +22,8 @@ const IngredientInput: FC = () => {
     name: "ingredient",
   });
 
-  console.log(errors);
-
+  const { data: ingredientData } = useGetIngredients();
+  console.log("#", ingredientData);
   return (
     <>
       <Box>
@@ -62,7 +61,8 @@ const IngredientInput: FC = () => {
                       {...rest}
                       freeSolo
                       disablePortal
-                      options={nutritionTab}
+                      options={ingredientData ? ingredientData : []}
+                      getOptionLabel={(option: any) => option.name}
                       sx={{ width: "100%" }}
                       onChange={(_, data) => Change(data)}
                       renderInput={(params) => (

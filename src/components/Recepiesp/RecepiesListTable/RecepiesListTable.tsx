@@ -9,7 +9,6 @@ import {
   Dialog,
   DialogActions,
   Button,
-  Checkbox,
   Paper,
   Typography,
   Toolbar,
@@ -163,7 +162,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Liste des Recettes
+          Liste des Ingrédients
         </Typography>
       )}
       {/* if any elements are selected in the table -> show button for any action */}
@@ -273,7 +272,7 @@ const MuiTableRow = ({
     if (isSuccessDeleteIngredient) {
       setOpen(false);
 
-      enqueueSnackbar("Recette supprimée avec succès", {
+      enqueueSnackbar("Ingrédient supprimé avec succès", {
         variant: "success",
         anchorOrigin: {
           vertical: "bottom",
@@ -281,7 +280,7 @@ const MuiTableRow = ({
         },
       });
 
-      queryClient.refetchQueries("recipes");
+      queryClient.refetchQueries("ingredients");
 
       setTimeout(() => {
         closeSnackbar();
@@ -371,6 +370,7 @@ const MuiTableRow = ({
             className={classes.menu_update_container}
             disableRipple={true}
           >
+            {" "}
             <div>
               <UpdateIcon /> <span className="menu_title">Modifier</span>
             </div>
@@ -394,11 +394,13 @@ const MuiTableRow = ({
       >
         <DialogTitle className={DialogClasses.alert_dialog_title}>
           <Trash />
-          <span className="alert_dialog_title_text">Supprimer recette ?</span>
+          <span className="alert_dialog_title_text">
+            Supprimer ingrédient ?
+          </span>
         </DialogTitle>
         <DialogContent className={DialogClasses.alert_dialog_content}>
           <DialogContentText>
-            êtes vous sur de supprimer cette recette ?
+            êtes vous sur de supprimer cet ingrédient ?
           </DialogContentText>
         </DialogContent>
         <DialogActions className={DialogClasses.alert_dialog_actions}>
