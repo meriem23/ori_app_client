@@ -85,6 +85,8 @@ const AddIngredients = () => {
     reset: resetaddIngredient,
   } = useMutation(AddIngredient);
 
+  console.log("#errors", errors);
+
   const onSubmit: SubmitHandler<igredientProps> = (data) => {
     console.log("#data", data);
     addIngredientMutateAsync(data);
