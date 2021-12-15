@@ -13,7 +13,7 @@ export const theme = (dark: boolean) =>
     },
     direction: "ltr",
     shape: {
-      borderRadius: 6,
+      borderRadius: 10,
     },
     overrides: {
       MuiPaper: {
@@ -22,6 +22,11 @@ export const theme = (dark: boolean) =>
           "& .MuiPaper-elevation4": {
             boxShadow: "none",
           },
+        },
+      },
+      MuiCircularProgress: {
+        root: {
+          color: "grey !important",
         },
       },
     },
@@ -123,7 +128,7 @@ export const theme = (dark: boolean) =>
       },
       h6: {
         fontWeight: 300,
-        fontSize: "1.25rem",
+        fontSize: "18px",
         lineHeight: 1.167,
         letterSpacing: "-0.01562em",
       },

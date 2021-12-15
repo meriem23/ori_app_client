@@ -146,8 +146,8 @@ export default function ResponsiveDrawer(props: Props) {
   const { pathname } = useLocation();
   const { push } = useHistory();
 
-  const pathnames = pathname.split("/").filter((el, i) => el && i < 4);
-  console.log("#pathanmes", pathnames);
+  const pathnames = pathname.split("/").filter((el, i) => el && i < 3);
+  // console.log("#pathanmes", pathnames);
 
   return (
     <div className={classes.root}>

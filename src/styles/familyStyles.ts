@@ -12,6 +12,7 @@ export const useStylesFamily: any = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       padding: "10px 30px 20px ",
       borderRadius: "10px",
+      minWidth: "650px",
     },
     form_title: {
       fontSize: "18px",

@@ -2,7 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
 import PageHeader from "../../PageHeader/PageHeader";
-import RecepiesListEnhancedTable from "../IngredientsListTable/RecepiesListTable";
+import RecepiesListEnhancedTable from "../IngredientsListTable/IngredientsListTable";
 
 const RecepiesList = () => {
   interface HeadCell {
@@ -79,7 +79,7 @@ const RecepiesList = () => {
               transform: "translateX(50%)",
             }}
           >
-            <CircularProgress />
+            <CircularProgress style={{ color: "grey" }} />
           </div>
         </div>
       ) : (

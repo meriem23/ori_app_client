@@ -10,15 +10,17 @@ import Homepage from "./components/Homepage/Homepage";
 import { useState } from "react";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
-import RecepiesList from "./components/Recepies/IngredientsList.tsx/RecepiesList";
 import FamiliesList from "./components/Families/FamiliesList.tsx/FamiliesList";
 import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
 import Register from "./pages/Register";
 import AddFamily from "./components/Families/AddFamilies.tsx/AddFamily";
 import AddFormeForm from "./components/Shapes/AddShape.tsx/AddShape";
-import AddIngredients from "./components/Recepies/AddIngredient.tsx/IngredientAdd";
-import RecipeAdd from "./components/Recepiesp/AddRecepie.tsx/RecipeAdd";
-import RecipesList from "./components/Recepiesp/RecepiesList.tsx/RecepiesList";
+import RecepiesList from "./components/Ingredients/IngredientsList.tsx/IngredientsList";
+import AddIngredients from "./components/Ingredients/AddIngredient.tsx/IngredientAdd";
+import RecipeAdd from "./components/Recepies/AddRecepie.tsx/RecipeAdd";
+import DetailsIngredient from "./components/Ingredients/DetailsIngredient/DetailsIngredient";
+import UpdateIngredient from "./components/Ingredients/UpdateIngredient.tsx/UpdateIngredient";
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -35,25 +37,39 @@ function App() {
               <Route exact path="/contact" component={Contact} />
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
+                {/* ingredients */}
                 <Route exact path="/Ingredients" component={RecepiesList} />
                 <Route
                   exact
                   path="/Ingredients/Ajout_Ingredient"
                   component={AddIngredients}
                 />
+                <Route
+                  exact
+                  path="/Ingredients/Details_Ingredient/:id"
+                  component={DetailsIngredient}
+                />
+                <Route
+                  exact
+                  path="/Ingredients/Update_Ingredient/:id"
+                  component={UpdateIngredient}
+                />
+                {/* familles */}
                 <Route exact path="/Familles" component={FamiliesList} />
                 <Route
                   exact
                   path="/Familles/Ajout_Famille"
                   component={AddFamily}
                 />
+                {/* formes */}
                 <Route exact path="/Formes" component={ShapesList} />
                 <Route
                   exact
                   path="/Formes/Ajout_Forme"
                   component={AddFormeForm}
                 />
-                <Route exact path="/Recettes" component={RecipesList} />
+                {/* recette */}
+                <Route exact path="/Recettes" component={RecepiesList} />
                 <Route
                   exact
                   path="/Recettes/Ajout_Recette"

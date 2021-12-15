@@ -41,6 +41,7 @@ import { getComparator, stableSort } from "../../../utils/tableFunctions";
 import { useToolbarStyles } from "../../../styles/TollbarStyles";
 import { useStylesMenu } from "../../../styles/menuStyles";
 import { DeleteIngredient } from "../../../services/IngredientsServices/ingredientServices";
+import { useHistory } from "react-router";
 
 // import { useStylesMenu } from "../../../styles/menuStyles";
 // import { useToolbarStyles } from "../../../styles/TollbarStyles";
@@ -231,6 +232,7 @@ const MuiTableRow = ({
   const tableClasses = useStylesTable();
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { push } = useHistory();
 
   const isItemSelected = isSelected(Ingredient._id);
   const labelId = `enhanced-table-checkbox-${index}`;
@@ -249,6 +251,12 @@ const MuiTableRow = ({
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleUpdateIngredient = (e: any) => {
+    e.stopPropagation();
+    setAnchorEl(null);
+    push(`/Ingredients/Update_Ingredient/${Ingredient._id}`);
   };
 
   const [open, setOpen] = React.useState(false);
@@ -293,7 +301,6 @@ const MuiTableRow = ({
   return (
     <TableRow
       hover
-      // onClick={(event) => handleClick(event, Ingredient.Rol_Code_V)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -319,7 +326,14 @@ const MuiTableRow = ({
       {headCells.filter((el: any) => el.id === "name")[0]?.checked && (
         <TableCell>
           {Ingredient.name ? (
-            Ingredient.name
+            <span
+              onClick={(e: any) => {
+                e.stopPropagation();
+                push(`/Ingredients/Details_Ingredient/${Ingredient._id}`);
+              }}
+            >
+              {Ingredient.name}
+            </span>
           ) : (
             <span style={{ fontWeight: 700 }}>--</span>
           )}
@@ -367,7 +381,7 @@ const MuiTableRow = ({
           className={classes.poper_menu_container}
         >
           <MenuItem
-            onClick={handleClose}
+            onClick={handleUpdateIngredient}
             className={classes.menu_update_container}
             disableRipple={true}
           >
@@ -534,11 +548,11 @@ export default function RecepiesListEnhancedTable({
               {/* {stableSort(recepiesData, getComparator(order, orderBy)) */}
               {recepiesData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((role: any, index: any) => {
+                .map((ingredient: any, index: any) => {
                   return (
                     <MuiTableRow
                       index={index}
-                      Ingredient={role}
+                      Ingredient={ingredient}
                       isSelected={isSelected}
                       handleClick={handleClick}
                       key={index}
