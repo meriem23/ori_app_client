@@ -167,7 +167,6 @@ const AddIngredients = () => {
                   disableCloseOnSelect
                   onChange={(_, data) => Change(data._id)}
                   getOptionLabel={(option: any) => option.name}
-                  // placeholder="Nationality"
                   renderInput={(params) => (
                     <TextField
                       {...params}

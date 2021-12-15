@@ -10,6 +10,7 @@ import {
   IoFastFoodOutline,
   IoShapesOutline,
   IoNewspaperOutline,
+  IoCartOutline,
 } from "react-icons/io5";
 import { RiDashboardLine } from "react-icons/ri";
 
@@ -46,6 +47,11 @@ const MenuComp = () => {
       link: "/Recettes",
       Icon: <IoNewspaperOutline />,
     },
+    {
+      name: "Fournisseurs",
+      link: "/Fournisseurs",
+      Icon: <IoCartOutline />,
+    },
   ];
   return (
     <>
@@ -81,13 +87,6 @@ const AppMenu: React.FC = () => {
 
   const [connectedUser, setConnectedUser] = useState<any>(undefined);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     user.hasOwnProperty("payment_mode")
-  //       ? setConnectedUser("adherent")
-  //       : setConnectedUser("admin");
-  //   }
-  // }, [user]);
   return (
     <List
       component="nav"

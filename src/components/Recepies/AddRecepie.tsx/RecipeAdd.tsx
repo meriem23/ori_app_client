@@ -20,7 +20,7 @@ import { addRecipe } from "../../../services/recipeServices/recipeServices";
 
 type recipeProps = {
   name: string;
-  ingredient: {
+  ingredients: {
     ingredient__label: string;
     ingredient__quantity: string;
   }[];
@@ -35,13 +35,13 @@ const AddRecipe = () => {
   const methods = useForm<recipeProps>({
     defaultValues: {
       name: "",
-      ingredient: [
+      instructions: "",
+      ingredients: [
         {
           ingredient__label: "",
           ingredient__quantity: "",
         },
       ],
-      instructions: "",
     },
   });
   const {
@@ -55,9 +55,6 @@ const AddRecipe = () => {
     control,
   });
 
-  useEffect(() => {
-    console.log("#dataWatch", dataWatch);
-  }, [dataWatch]);
   const {
     mutateAsync: addRecipeMutateAsync,
     isSuccess: isaddRecipeSuccess,
