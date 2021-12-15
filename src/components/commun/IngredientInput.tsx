@@ -19,11 +19,10 @@ const IngredientInput: FC = () => {
   } = useFormContext<any>();
   const { fields, append, remove } = useFieldArray<any>({
     control,
-    name: "ingredient",
+    name: "ingredients",
   });
 
   const { data: ingredientData } = useGetIngredients();
-  console.log("#", ingredientData);
   return (
     <>
       <Box>
@@ -52,7 +51,7 @@ const IngredientInput: FC = () => {
                 }}
               >
                 <Controller
-                  name={`ingredient.${index}.ingredient__label`}
+                  name={`ingredients.${index}.ingredient__label`}
                   control={control}
                   render={({
                     field: { onChange: Change, value, ref, ...rest },
@@ -89,7 +88,7 @@ const IngredientInput: FC = () => {
                   sx={{ minWidth: "100%" }}
                   placeholder="Quantité"
                   className={clsx(textFieldClasses.second)}
-                  {...register(`ingredient.${index}.ingredient__quantity`, {
+                  {...register(`ingredients.${index}.ingredient__quantity`, {
                     required: "Saisir la quantité de l'ingrédient",
                   })}
                 />

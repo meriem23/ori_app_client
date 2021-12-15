@@ -365,7 +365,7 @@ const MuiTableRow = ({
           onClose={handleClose}
           className={classes.poper_menu_container}
         >
-          <MenuItem
+          {/* <MenuItem
             onClick={handleClose}
             className={classes.menu_update_container}
             disableRipple={true}
@@ -374,7 +374,7 @@ const MuiTableRow = ({
             <div>
               <UpdateIcon /> <span className="menu_title">Modifier</span>
             </div>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem
             onClick={handleClose}
             className={classes.menu_delete_container}
