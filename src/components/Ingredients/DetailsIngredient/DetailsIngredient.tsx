@@ -67,7 +67,7 @@ function DetailsIngredient() {
               <ValueContainer>{IngredientData?.family?.name}</ValueContainer>
             </div>
             <div className={commonClasses.info_container}>
-              <LabelContainer>Nom Forme :</LabelContainer>
+              <LabelContainer>Nature Ingrédient :</LabelContainer>
               <ValueContainer>{IngredientData?.shape?.name}</ValueContainer>
             </div>
             <div

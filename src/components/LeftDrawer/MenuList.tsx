@@ -22,24 +22,19 @@ const MenuComp = () => {
       Icon: <RiDashboardLine />,
     },
     {
-      name: "Ingrédients",
-      link: "/Ingredients",
-      Icon: <IoFastFoodOutline />,
-      // items: [
-      //   {
-      //     name: "Test1.1",
-      //     // link: "/setup/roles",
-      //   },
-      // ],
-    },
-    {
       name: "Familles",
       link: "/Familles",
       Icon: <AiOutlineGroup />,
     },
     {
-      name: "Formes",
-      link: "/Formes",
+      name: "Ingrédients",
+      link: "/Ingredients",
+      Icon: <IoFastFoodOutline />,
+    },
+
+    {
+      name: "Natures",
+      link: "/Natures",
       Icon: <IoShapesOutline />,
     },
     {

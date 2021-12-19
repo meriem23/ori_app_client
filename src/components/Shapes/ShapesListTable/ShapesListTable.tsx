@@ -163,7 +163,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Listes des Formes
+          Listes des Natures
         </Typography>
       )}
       {/* if any elements are selected in the table -> show button for any action */}
@@ -373,11 +373,13 @@ const MuiTableRow = ({
       >
         <DialogTitle className={DialogClasses.alert_dialog_title}>
           <Trash />
-          <span className="alert_dialog_title_text">Supprimer Forme ?</span>
+          <span className="alert_dialog_title_text">
+            Supprimer cette Nature ?
+          </span>
         </DialogTitle>
         <DialogContent className={DialogClasses.alert_dialog_content}>
           <DialogContentText>
-            êtes vous sur de supprimer cette forme ?
+            êtes vous sur de supprimer cette Nature ?
           </DialogContentText>
         </DialogContent>
         <DialogActions className={DialogClasses.alert_dialog_actions}>

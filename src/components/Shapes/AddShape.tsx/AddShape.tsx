@@ -35,7 +35,7 @@ function AddFormeForm() {
     {
       type: "text",
       name: "name",
-      label: "Nom de la forme",
+      label: "Nature",
       disabled: false,
       rules: {
         required: "Ce champ est obligatoire",
@@ -74,14 +74,14 @@ function AddFormeForm() {
 
   useEffect(() => {
     if (isaddShapeSuccess && addShapeData) {
-      enqueueSnackbar("forme ajoutée avec succès.", {
+      enqueueSnackbar("nature ajoutée avec succès.", {
         variant: "success",
         anchorOrigin: {
           vertical: "bottom",
           horizontal: "center",
         },
       });
-      push("/Formes");
+      push("/Natures");
       setTimeout(() => {
         closeSnackbar();
       }, 5000);
@@ -105,7 +105,7 @@ function AddFormeForm() {
 
   return (
     <div className={ShapeClasses.add_form_container}>
-      <p className={ShapeClasses.form_title}>Ajout d'une forme</p>
+      <p className={ShapeClasses.form_title}>Ajouter une nouvelle Nature</p>
       <FormProvider {...methods}>
         <form
           onSubmit={methods.handleSubmit(onSubmit)}

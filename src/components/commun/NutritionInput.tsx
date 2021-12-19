@@ -75,13 +75,13 @@ const NutritionInput = ({ updateMode }: any) => {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          label="Facteur nutritionnel"
+                          label="Composition Nutritionnelle"
                           className={clsx(textFieldClasses.second)}
                         />
                       )}
                     />
                   )}
-                  rules={{ required: "Choose one of the options" }}
+                  rules={{ required: "Choisir au moins un composant" }}
                 />
 
                 <p>{errors?.fact__label?.message}</p>
@@ -97,7 +97,7 @@ const NutritionInput = ({ updateMode }: any) => {
                   placeholder="Quantité"
                   className={clsx(textFieldClasses.second)}
                   {...register(`fact.${index}.fact__quantity`, {
-                    required: "Saisir la quantité du facteur nutritionnel",
+                    required: "Saisir la valeur du composant nutritionnel",
                   })}
                 />
                 <p>{errors?.fact__quantity?.message}</p>

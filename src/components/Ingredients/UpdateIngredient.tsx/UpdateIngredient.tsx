@@ -230,12 +230,14 @@ const UpdateIngredient = () => {
                         variant="outlined"
                         sx={{ width: "100%" }}
                         className={clsx(textFieldClasses.second)}
-                        label="Nom de la forme"
+                        label="Nature Ingrédient"
                       />
                     )}
                   />
                 )}
-                rules={{ required: "Veuillez choisir une forme" }}
+                rules={{
+                  required: "Veuillez choisir la nature de l'ingrédient",
+                }}
               />
               <p className={clsx(textFieldClasses.error)}>
                 {errors?.shape?.name?.message}
