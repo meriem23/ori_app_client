@@ -14,14 +14,14 @@ import { CircularProgress } from "@material-ui/core";
 const Contact = () => {
   interface FormContactSchema {
     email: string;
-    nom: string;
+    objet: string;
     message: string;
   }
 
   const methods = useForm<FormContactSchema>({
     defaultValues: {
       email: "",
-      nom: "",
+      objet: "",
       message: "",
     },
   });
@@ -42,10 +42,10 @@ const Contact = () => {
     },
     {
       type: "text",
-      name: "nom",
-      label: "Nom",
+      name: "objet",
+      label: "Objet",
       disabled: false,
-      typeValue: "nom",
+      typeValue: "objet",
       rules: {
         required: "Ce champ est obligatoire",
       },
@@ -56,6 +56,8 @@ const Contact = () => {
       label: "Message",
       disabled: false,
       typeValue: "message",
+      multiline: true,
+      rows: 9,
       rules: {
         required: "Ce champ est obligatoire",
       },
@@ -91,7 +93,7 @@ const Contact = () => {
           }, 5000);
           setloading(false);
           methods.setValue("email", "");
-          methods.setValue("nom", "");
+          methods.setValue("objet", "");
           methods.setValue("message", "");
         },
         (error) => {
@@ -108,10 +110,6 @@ const Contact = () => {
         }
       );
   }
-  function okMessage() {
-    alert("Votre message à bien été envoyer");
-  }
-  const contactClasses = useStylesContact();
   const loginClasses = useStylesLogin();
   const ButtonClasses = useStylesButton();
 

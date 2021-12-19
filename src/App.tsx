@@ -62,10 +62,10 @@ function App() {
                   component={AddFamily}
                 />
                 {/* formes */}
-                <Route exact path="/Formes" component={ShapesList} />
+                <Route exact path="/Natures" component={ShapesList} />
                 <Route
                   exact
-                  path="/Formes/Ajout_Forme"
+                  path="/Natures/Ajout_Nature"
                   component={AddFormeForm}
                 />
                 {/* recette */}

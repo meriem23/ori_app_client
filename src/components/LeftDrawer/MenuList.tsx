@@ -16,21 +16,25 @@ import { RiDashboardLine } from "react-icons/ri";
 
 const MenuComp = () => {
   const appMenuItemsAdherent = [
+    // {
+    //   name: "Dashboard",
+    //   link: "/dashboard",
+    //   Icon: <RiDashboardLine />,
+    // },
     {
-      name: "Dashboard",
-      link: "/dashboard",
-      Icon: <RiDashboardLine />,
+      name: "Natures",
+      link: "/Natures",
+      Icon: <IoShapesOutline />,
     },
-
     {
       name: "Familles",
       link: "/Familles",
       Icon: <AiOutlineGroup />,
     },
     {
-      name: "Formes",
-      link: "/Formes",
-      Icon: <IoShapesOutline />,
+      name: "Ingrédients",
+      link: "/Ingredients",
+      Icon: <IoFastFoodOutline />,
     },
     {
       name: "Ingrédients",

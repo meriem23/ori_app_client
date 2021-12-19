@@ -201,12 +201,12 @@ const AddIngredients = () => {
                       variant="outlined"
                       sx={{ width: "100%" }}
                       className={clsx(textFieldClasses.second)}
-                      label="Nom de la famille"
+                      label="Nature de l'ingrédient"
                     />
                   )}
                 />
               )}
-              rules={{ required: "Veuillez choisir une famille" }}
+              rules={{ required: "Veuillez choisir la nature de l'ingrédient" }}
             />
             <p className={clsx(textFieldClasses.error)}>
               {errors?.family?.message}

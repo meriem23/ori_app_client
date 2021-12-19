@@ -21,7 +21,7 @@ const ShapesList = () => {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Nom Forme",
+      label: "Nature",
       show: true,
       value: "name",
       checked: true,
@@ -30,7 +30,7 @@ const ShapesList = () => {
       id: "description",
       numeric: false,
       disablePadding: false,
-      label: "Description Forme",
+      label: "Description Nature",
       show: true,
       value: "description",
       checked: true,
@@ -58,9 +58,9 @@ const ShapesList = () => {
   return (
     <div>
       <PageHeader
-        buttonLink="/Formes/Ajout_Forme"
-        buttonText="Ajouter une forme"
-        titleValue="Formes"
+        buttonLink="/Natures/Ajout_Nature"
+        buttonText="Ajouter une Nature"
+        titleValue="Natures"
       />
       {isLoadingShapes ? (
         <div style={{ width: "100%", position: "relative" }}>
