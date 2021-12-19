@@ -3,7 +3,7 @@ import LoginIllustration from "../images/loginIllustration";
 import { useStylesLogin } from "../styles/loginStyles";
 import { useForm, FormProvider } from "react-hook-form";
 import Field from "../components/FormsElements/Field";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { useStylesButton } from "../styles/buttonStyles";
 import { useMutation } from "react-query";
 import { login } from "../services/authServices";
@@ -139,7 +139,21 @@ export default function Login() {
               {formInputs.map((el: any) => (
                 <Field name={el.name} {...el} />
               ))}
-              <Button type="submit" className={ButtonClasses.BigBlueButton}>
+              <Button
+                type="submit"
+                className={ButtonClasses.BigBlueButton}
+                disabled={isLoadingLogin}
+              >
+                {isLoadingLogin && (
+                  <CircularProgress
+                    style={{
+                      marginRight: "10px",
+                      height: "20px",
+                      width: "20px",
+                      color: "white",
+                    }}
+                  />
+                )}
                 Se Connecter
               </Button>
             </form>

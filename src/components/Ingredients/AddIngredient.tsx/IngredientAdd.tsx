@@ -18,6 +18,8 @@ import { AddIngredient } from "../../../services/IngredientsServices/ingredientS
 import { useMutation } from "react-query";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
+import { Forms__styles } from "../../../styles/Forms__styles";
+import CloseIcon from "@material-ui/icons/Close";
 
 type igredientProps = {
   name: string;
@@ -26,13 +28,16 @@ type igredientProps = {
     fact__quantity: string;
   }[];
   family: string;
-  shape: string;
+  shapes: string[];
 };
 
 const AddIngredients = () => {
   const ShapeClasses = useStylesShape();
   const textFieldClasses: any = useStylesTextField();
   const ButtonClasses = useStylesButton();
+  const FormsClasses = Forms__styles();
+
+  const [selectedFamily, setselectedFamily] = useState<any>(null);
 
   const methods = useForm<igredientProps>({
     defaultValues: {
@@ -44,7 +49,7 @@ const AddIngredients = () => {
         },
       ],
       family: "",
-      shape: "",
+      shapes: [],
     },
   });
   const {
@@ -89,12 +94,34 @@ const AddIngredients = () => {
 
   const onSubmit: SubmitHandler<igredientProps> = (data) => {
     console.log("#data", data);
-    addIngredientMutateAsync(data);
+    addIngredientMutateAsync({
+      name: data.name,
+      fact: data.fact,
+      family: data.family,
+      shapes: data.shapes.map((el: any) => el._id),
+    });
   };
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { push } = useHistory();
+
+  const onDeleteShapesTags = (item: any) => () => {
+    const dishTags =
+      dataWatch?.shapes?.filter((row: any) => row.name !== item.name) || [];
+    methods.setValue("shapes", dishTags as any);
+  };
+
+  useEffect(() => {
+    if (dataWatch.family) {
+      setselectedFamily(
+        familiesData.filter((el: any) => el._id === dataWatch.family)[0]
+      );
+    } else if (!dataWatch.family) {
+      methods.setValue("shapes", []);
+      setselectedFamily(undefined);
+    }
+  }, [dataWatch.family]);
 
   useEffect(() => {
     if (isaddIngredientSuccess && addIngredientData) {
@@ -155,38 +182,6 @@ const AddIngredients = () => {
 
           <Box style={{ padding: "0px 0 8px" }}>
             <Controller
-              name="shape"
-              control={control}
-              render={({
-                field: { onChange: Change, value, ref, ...rest },
-              }) => (
-                <Autocomplete
-                  {...rest}
-                  freeSolo
-                  options={shapesData ? shapesData : []}
-                  disableCloseOnSelect
-                  onChange={(_, data) => Change(data._id)}
-                  getOptionLabel={(option: any) => option.name}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      inputRef={ref}
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                      className={clsx(textFieldClasses.second)}
-                      label="Nom de la forme"
-                    />
-                  )}
-                />
-              )}
-              rules={{ required: "Veuillez choisir une forme" }}
-            />
-            <p className={clsx(textFieldClasses.error)}>
-              {errors?.shape?.message}
-            </p>
-          </Box>
-          <Box style={{ padding: "0px 0 8px" }}>
-            <Controller
               name="family"
               control={control}
               render={({
@@ -196,8 +191,8 @@ const AddIngredients = () => {
                   {...rest}
                   freeSolo
                   options={familiesData ? familiesData : []}
-                  disableCloseOnSelect
-                  onChange={(_, data) => Change(data._id)}
+                  // disableCloseOnSelect
+                  onChange={(_, data) => Change(data?._id ? data?._id : "")}
                   getOptionLabel={(option: any) => option.name}
                   renderInput={(params) => (
                     <TextField
@@ -216,6 +211,72 @@ const AddIngredients = () => {
             <p className={clsx(textFieldClasses.error)}>
               {errors?.family?.message}
             </p>
+          </Box>
+
+          <Box style={{ padding: "0px 0 8px" }}>
+            <Controller
+              name="shapes"
+              control={control}
+              render={({
+                field: { onChange: Change, value, ref, ...rest },
+              }) => (
+                <Autocomplete
+                  {...rest}
+                  multiple
+                  options={selectedFamily ? selectedFamily?.shapes : []}
+                  disableCloseOnSelect
+                  getOptionLabel={(option: any) => option.name}
+                  onChange={(_, data) => Change(data)}
+                  renderTags={() => null}
+                  //@ts-ignore
+                  value={dataWatch?.shapes ? dataWatch?.shapes : []}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      inputRef={ref}
+                      variant="outlined"
+                      sx={{ width: "100%" }}
+                      className={clsx(textFieldClasses.second)}
+                      label="Nom de la forme"
+                    />
+                  )}
+                />
+              )}
+              rules={{ required: "Veuillez choisir une forme" }}
+            />
+            {dataWatch?.shapes?.length
+              ? dataWatch?.shapes?.length > 0 && (
+                  <Box
+                    mt={3}
+                    // sx={{
+                    //   "& > :not(:last-child)": {
+                    //     marginRight: 1,
+                    //     marginTop: 1,
+                    //   },
+                    //   "& > *": { marginBottom: 1, marginTop: 1 },
+                    // }}
+                  >
+                    <Box className={clsx(FormsClasses.chips__container__tags)}>
+                      {dataWatch.shapes.map((item: any) => (
+                        <Chip
+                          key={item.value}
+                          label={`${item.name}`}
+                          onDelete={onDeleteShapesTags(item)}
+                          deleteIcon={
+                            <CloseIcon
+                              className={FormsClasses.chips__tags__icon}
+                            />
+                          }
+                          className={FormsClasses.chips__tags}
+                        />
+                      ))}
+                    </Box>
+                  </Box>
+                )
+              : null}
+            {/* <p className={clsx(textFieldClasses.error)}>
+              {errors?.shapes?.message}
+            </p> */}
           </Box>
 
           <Button

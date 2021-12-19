@@ -9,7 +9,7 @@ export const useStylesButton: any = makeStyles((theme: Theme) =>
       padding: "8px 24px !important",
       fontSize: "1.1em !important",
       width: "fit-content !important",
-      minWidth: "6em !important",
+      minWidth: "7em !important",
       backgroundColor: `${theme.palette.secondary.main} !important`,
       color: "white !important",
       fontWeight: 600,

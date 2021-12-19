@@ -21,17 +21,7 @@ const MenuComp = () => {
       link: "/dashboard",
       Icon: <RiDashboardLine />,
     },
-    {
-      name: "Ingrédients",
-      link: "/Ingredients",
-      Icon: <IoFastFoodOutline />,
-      // items: [
-      //   {
-      //     name: "Test1.1",
-      //     // link: "/setup/roles",
-      //   },
-      // ],
-    },
+
     {
       name: "Familles",
       link: "/Familles",
@@ -41,6 +31,11 @@ const MenuComp = () => {
       name: "Formes",
       link: "/Formes",
       Icon: <IoShapesOutline />,
+    },
+    {
+      name: "Ingrédients",
+      link: "/Ingredients",
+      Icon: <IoFastFoodOutline />,
     },
     {
       name: "Recettes",

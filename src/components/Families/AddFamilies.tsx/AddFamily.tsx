@@ -4,8 +4,9 @@ import {
   FormProvider,
   useFormContext,
   useWatch,
+  Controller,
 } from "react-hook-form";
-import { Button } from "@material-ui/core";
+import { Box, Button, Chip, TextField } from "@material-ui/core";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
@@ -15,22 +16,45 @@ import { useStylesButton } from "../../../styles/buttonStyles";
 import { useStylesFamily } from "../../../styles/familyStyles";
 import clsx from "clsx";
 import { AddFamily } from "../../../services/familyServices/familyServices";
+import { useGetShapes } from "../../../services/shapesServices/shapesServices";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { useStylesTextField } from "../../../styles/textFieldStyles";
+import CloseIcon from "@material-ui/icons/Close";
+import { Forms__styles } from "../../../styles/Forms__styles";
 
 function AddFamilyForm() {
   const ButtonClasses = useStylesButton();
   const FamilyClasses = useStylesFamily();
+  const textFieldClasses: any = useStylesTextField();
+  const FormsClasses = Forms__styles();
+
+  //queries and mutations
+  const {
+    data: shapesData,
+    isLoading: isLoadingShapes,
+    isSuccess: isSuccessShapes,
+    refetch: refetchShapes,
+  } = useGetShapes();
 
   interface FormFamilySchema {
     name: string;
     description: string;
+    shapes: any;
   }
 
   const methods = useForm<FormFamilySchema>({
     defaultValues: {
       name: "",
       description: "",
+      shapes: [],
     },
   });
+
+  const dataWatch = useWatch({
+    control: methods.control,
+  });
+
+  console.log("#dataWatch", dataWatch);
 
   const formInputs = [
     {
@@ -65,13 +89,24 @@ function AddFamilyForm() {
   } = useMutation(AddFamily);
 
   const onSubmit = (data: any) => {
-    addFamilyMutateAsync(data);
+    addFamilyMutateAsync({
+      ...data,
+      shapes: data.shapes.map((el: any) => {
+        return el._id;
+      }),
+    });
     console.log(data);
   };
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { push } = useHistory();
+
+  const onDeleteShapesTags = (item: any) => () => {
+    const dishTags =
+      dataWatch?.shapes?.filter((row: any) => row.name !== item.name) || [];
+    methods.setValue("shapes", dishTags as any);
+  };
 
   useEffect(() => {
     if (isaddFamilySuccess && addFamilyData) {
@@ -115,6 +150,64 @@ function AddFamilyForm() {
           {formInputs.map((el: any) => (
             <Field name={el.name} {...el} />
           ))}
+          <Controller
+            name="shapes"
+            control={methods.control}
+            rules={{ required: "Choose Tags" }}
+            render={({
+              field: { onChange: Change, value, ref, ...rest },
+              fieldState: { error },
+            }) => (
+              <React.Fragment>
+                <Autocomplete
+                  {...rest}
+                  multiple
+                  id="recipe-outlined"
+                  value={dataWatch?.shapes ? dataWatch?.shapes : []}
+                  options={shapesData ? shapesData : []}
+                  getOptionLabel={(option) => option.name}
+                  renderTags={() => null}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      inputRef={ref}
+                      variant="outlined"
+                      // sx={{ width: "100%" }}
+                      className={clsx(textFieldClasses.second)}
+                    />
+                  )}
+                  onChange={(_, data) => Change(data)}
+                />
+                <p className={clsx(textFieldClasses.error)}>{error?.message}</p>
+              </React.Fragment>
+            )}
+          />
+          {dataWatch?.shapes?.length > 0 && (
+            <Box
+              mt={3}
+              // sx={{
+              //   "& > :not(:last-child)": {
+              //     marginRight: 1,
+              //     marginTop: 1,
+              //   },
+              //   "& > *": { marginBottom: 1, marginTop: 1 },
+              // }}
+            >
+              <Box className={clsx(FormsClasses.chips__container__tags)}>
+                {dataWatch.shapes.map((item: any) => (
+                  <Chip
+                    key={item.value}
+                    label={`${item.name}`}
+                    onDelete={onDeleteShapesTags(item)}
+                    deleteIcon={
+                      <CloseIcon className={FormsClasses.chips__tags__icon} />
+                    }
+                    className={FormsClasses.chips__tags}
+                  />
+                ))}
+              </Box>
+            </Box>
+          )}
           <Button
             type="submit"
             className={clsx(
