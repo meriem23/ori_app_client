@@ -56,6 +56,8 @@ const Contact = () => {
       label: "Message",
       disabled: false,
       typeValue: "message",
+      multiline: true,
+      rows: 9,
       rules: {
         required: "Ce champ est obligatoire",
       },
