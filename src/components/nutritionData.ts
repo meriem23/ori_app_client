@@ -25,7 +25,7 @@ export const nutritionTab = [
   },
   {
     fact__value: "fructose",
-    fact__label: "Fructose (g/100 g)	",
+    fact__label: "Fructose (g/100 g)",
   },
   {
     fact__value: "glucose",
