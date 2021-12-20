@@ -201,12 +201,14 @@ const AddIngredients = () => {
                       variant="outlined"
                       sx={{ width: "100%" }}
                       className={clsx(textFieldClasses.second)}
-                      label="Nature de l'ingrédient"
+                      label="Famille de l'ingrédient"
                     />
                   )}
                 />
               )}
-              rules={{ required: "Veuillez choisir la nature de l'ingrédient" }}
+              rules={{
+                required: "Veuillez choisir la famille de l'ingrédient",
+              }}
             />
             <p className={clsx(textFieldClasses.error)}>
               {errors?.family?.message}
@@ -237,12 +239,12 @@ const AddIngredients = () => {
                       variant="outlined"
                       sx={{ width: "100%" }}
                       className={clsx(textFieldClasses.second)}
-                      label="Nom de la forme"
+                      label="Nom de la nature"
                     />
                   )}
                 />
               )}
-              rules={{ required: "Veuillez choisir une forme" }}
+              rules={{ required: "Veuillez choisir une nature" }}
             />
             {dataWatch?.shapes?.length
               ? dataWatch?.shapes?.length > 0 && (

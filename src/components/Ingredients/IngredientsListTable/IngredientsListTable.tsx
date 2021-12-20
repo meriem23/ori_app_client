@@ -445,7 +445,7 @@ interface PropsRolesListEnhancedTable {
   headCells: any;
 }
 
-export default function RecepiesListEnhancedTable({
+export default function IngredientsListEnhancedTable({
   recepiesData,
   headCells,
 }: PropsRolesListEnhancedTable) {

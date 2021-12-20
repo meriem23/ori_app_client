@@ -21,6 +21,8 @@ import { addRecipe } from "../../../services/recipeServices/recipeServices";
 type recipeProps = {
   name: string;
   ingredients: {
+    family: string;
+    shape: string;
     ingredient__label: string;
     ingredient__quantity: string;
   }[];
@@ -38,6 +40,8 @@ const AddRecipe = () => {
       instructions: "",
       ingredients: [
         {
+          family: "",
+          shape: "",
           ingredient__label: "",
           ingredient__quantity: "",
         },

@@ -15,11 +15,12 @@ import ShapesList from "./components/Shapes/ShapesList.tsx/ShapesList";
 import Register from "./pages/Register";
 import AddFamily from "./components/Families/AddFamilies.tsx/AddFamily";
 import AddFormeForm from "./components/Shapes/AddShape.tsx/AddShape";
-import RecepiesList from "./components/Ingredients/IngredientsList.tsx/IngredientsList";
 import AddIngredients from "./components/Ingredients/AddIngredient.tsx/IngredientAdd";
+import IngredientsList from "./components/Ingredients/IngredientsList.tsx/IngredientsList";
 import RecipeAdd from "./components/Recepies/AddRecepie.tsx/RecipeAdd";
 import DetailsIngredient from "./components/Ingredients/DetailsIngredient/DetailsIngredient";
 import UpdateIngredient from "./components/Ingredients/UpdateIngredient.tsx/UpdateIngredient";
+import RecepiesList from "./components/Recepies/RecepiesList.tsx/RecepiesList";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +39,7 @@ function App() {
               <ResponsiveDrawer>
                 <Route exact path="/Dashboard" component={Homepage} />
                 {/* ingredients */}
-                <Route exact path="/Ingredients" component={RecepiesList} />
+                <Route exact path="/Ingredients" component={IngredientsList} />
                 <Route
                   exact
                   path="/Ingredients/Ajout_Ingredient"

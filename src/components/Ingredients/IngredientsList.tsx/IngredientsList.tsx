@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { CircularProgress } from "@material-ui/core";
 import PageHeader from "../../PageHeader/PageHeader";
-import RecepiesListEnhancedTable from "../IngredientsListTable/IngredientsListTable";
+import IngredientsListEnhancedTable from "../IngredientsListTable/IngredientsListTable";
 import { useGetIngredients } from "../../../services/IngredientsServices/ingredientServices";
 
-const RecepiesList = () => {
+const IngredientsList = () => {
   interface HeadCell {
     disablePadding: boolean;
     id: any;
@@ -83,7 +83,7 @@ const RecepiesList = () => {
           </div>
         </div>
       ) : (
-        <RecepiesListEnhancedTable
+        <IngredientsListEnhancedTable
           recepiesData={recepiesData}
           headCells={headCells}
         />
@@ -93,4 +93,4 @@ const RecepiesList = () => {
   );
 };
 
-export default RecepiesList;
+export default IngredientsList;
