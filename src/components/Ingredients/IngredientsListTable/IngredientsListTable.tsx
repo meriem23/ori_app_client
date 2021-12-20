@@ -87,31 +87,27 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             inputProps={{ "aria-label": "Select all roles" }}
           />
         </TableCell> */}
-        {headCells
-          .filter((row: any) => row.checked)
-          .map((headCell: any) => (
-            <TableCell
-              key={headCell.id}
-              align={headCell.numeric ? "right" : "left"}
-              padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderBy === headCell.id ? order : false}
+        {headCells.map((headCell: any) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
             >
-              <TableSortLabel
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : "asc"}
-                onClick={createSortHandler(headCell.id)}
-              >
-                {headCell.label}
-                {orderBy === headCell.id ? (
-                  <span className={classes.visuallyHidden}>
-                    {order === "desc"
-                      ? "sorted descending"
-                      : "sorted ascending"}
-                  </span>
-                ) : null}
-              </TableSortLabel>
-            </TableCell>
-          ))}
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <span className={classes.visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                </span>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
       </TableRow>
     </TableHead>
   );
@@ -296,8 +292,6 @@ const MuiTableRow = ({
       }, 5000);
     }
   }, [isSuccessDeleteIngredient]);
-
-  console.log("#Ingredient ", Ingredient);
   return (
     <TableRow
       hover
@@ -323,45 +317,38 @@ const MuiTableRow = ({
           )}
         </TableCell>
       )}
-      {headCells.filter((el: any) => el.id === "name")[0]?.checked && (
-        <TableCell>
-          {Ingredient.name ? (
-            <span
-              onClick={(e: any) => {
-                e.stopPropagation();
-                push(`/Ingredients/Details_Ingredient/${Ingredient._id}`);
-              }}
-            >
-              {Ingredient.name}
-            </span>
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {headCells.filter((el: any) => el.id === "family")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.family ? (
-            Ingredient?.family?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {headCells.filter((el: any) => el.id === "shape")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.shape ? (
-            Ingredient?.shape?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {/* {headCells.filter((el: any) => el.id === "rol_Approval_N")[0].checked && (
-        <TableCell>
-          {Ingredient.rol_Approval_N === "1" ? "active" : "Inactive"}
-        </TableCell>
-      )} */}
+
+      <TableCell>
+        {Ingredient.name ? (
+          <span
+            onClick={(e: any) => {
+              e.stopPropagation();
+              push(`/Ingredients/Details_Ingredient/${Ingredient._id}`);
+            }}
+          >
+            {Ingredient.name}
+          </span>
+        ) : (
+          <span style={{ fontWeight: 700 }}>--</span>
+        )}
+      </TableCell>
+
+      <TableCell>
+        {Ingredient?.family ? (
+          Ingredient?.family?.name
+        ) : (
+          <span style={{ fontWeight: 700 }}>--</span>
+        )}
+      </TableCell>
+
+      <TableCell>
+        {Ingredient?.shape ? (
+          Ingredient?.shape?.name
+        ) : (
+          <span style={{ fontWeight: 700 }}>--</span>
+        )}
+      </TableCell>
+
       <TableCell className={tableClasses.fixed_width_table_column}>
         <button
           onClick={handleClickMenu}

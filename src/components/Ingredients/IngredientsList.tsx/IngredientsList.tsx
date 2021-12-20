@@ -20,7 +20,7 @@ const IngredientsList = () => {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Recette",
+      label: "Ingrédient",
       show: true,
       value: "name",
       checked: true,
