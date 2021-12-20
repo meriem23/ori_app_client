@@ -17,6 +17,7 @@ import { useStylesShape } from "../../../styles/shapeStyles";
 import { useStylesTextField } from "../../../styles/textFieldStyles";
 import { useStylesButton } from "../../../styles/buttonStyles";
 import { addRecipe } from "../../../services/recipeServices/recipeServices";
+import InstructionInput from "../../commun/InstructionInput";
 
 type recipeProps = {
   name: string;
@@ -137,22 +138,7 @@ const AddRecipe = () => {
           </div>
           <IngredientInput />
           <div className={clsx(textFieldClasses.fieldsMargins)}>
-            <TextField
-              multiline
-              rows={6}
-              placeholder="Instructions de Cuissons"
-              label="Instructions de Cuissons"
-              className={clsx(textFieldClasses.second)}
-              sx={{
-                width: "100%",
-              }}
-              {...register("instructions", {
-                required: "Saisir les Instructions de Cuissons",
-              })}
-            />
-            {/* <p className={clsx(textFieldClasses.error)}>
-              {errors?.instructions?.message}
-            </p> */}
+            <InstructionInput />
           </div>
           <Button
             type="submit"

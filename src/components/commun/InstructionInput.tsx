@@ -20,7 +20,7 @@ const InstructionInput = ({ updateMode }: any) => {
   } = useFormContext<any>();
   const { fields, append, remove } = useFieldArray<any>({
     control,
-    name: "fact",
+    name: "instructions",
   });
 
   console.log(errors);
@@ -30,78 +30,94 @@ const InstructionInput = ({ updateMode }: any) => {
       <Box>
         {fields.map((item, index) => (
           <Box className={nutritionClasses.field_nutrition_container}>
-            <IconButton
+           { fields.length > 1 && <IconButton
               onClick={() => {
                 remove(index);
               }}
               className={nutritionClasses.delete_button}
             >
               <ClearIcon />
-            </IconButton>
+            </IconButton>}
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                  // justifyContent: "space-between",
+                  // width: "100%",
+                  padding: "0px 0 8px",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "50%",
+                  }}
+                >
+                  <TextField
+                    id="demo-helper-text-misaligned"
+                    sx={{ minWidth: "30%" }}
+                    placeholder="Titre"
+                    className={clsx(textFieldClasses.second)}
+                    {...register(`instructions.${index}.title`)}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    width: "50%",
+                  }}
+                >
+                  <TextField
+                    id="demo-helper-text-misaligned"
+                    sx={{ minWidth: "30%" }}
+                    placeholder="Instruction"
+                    className={clsx(textFieldClasses.second)}
+                    {...register(`instructions.${index}.instruction`)}
+                  />
+                </Box>
+              </Box>
+            </Box>
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
+                gap: "15px",
+                // justifyContent: "space-between",
+                // width: "100%",
                 padding: "0px 0 8px",
               }}
             >
               <Box
                 sx={{
-                  width: "49.3%",
-                }}
-              >
-                <Controller
-                  name={`fact.${index}.fact__label`}
-                  control={control}
-                  render={({
-                    field: { onChange: Change, value, ref, ...rest },
-                  }) => (
-                    <Autocomplete
-                      // {...rest}
-                      freeSolo
-                      disablePortal
-                      //@ts-ignore
-                      defaultValue={updateMode ? item : undefined}
-                      options={nutritionTab}
-                      getOptionLabel={(option) => option.fact__label}
-                      sx={{ width: "100%" }}
-                      //@ts-ignore
-                      onChange={(_, data) => {
-                        console.log("#", data);
-                        //@ts-ignore
-                        Change(data?.fact__label);
-                      }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Composition Nutritionnelle"
-                          className={clsx(textFieldClasses.second)}
-                        />
-                      )}
-                    />
-                  )}
-                  rules={{ required: "Choisir au moins un composant" }}
-                />
-
-                <p>{errors?.fact__label?.message}</p>
-              </Box>
-              <Box
-                sx={{
-                  width: "49.3%",
+                  width: "50%",
                 }}
               >
                 <TextField
                   id="demo-helper-text-misaligned"
-                  sx={{ minWidth: "100%" }}
-                  placeholder="Quantité"
+                  sx={{ minWidth: "30%" }}
+                  placeholder="Temps de cuisson"
                   className={clsx(textFieldClasses.second)}
-                  {...register(`fact.${index}.fact__quantity`, {
-                    required: "Saisir la valeur du composant nutritionnel",
+                  {...register(`instructions.${index}.time`, {
+                    required: "Saisir le Temps de cuisson",
                   })}
                 />
-                <p>{errors?.fact__quantity?.message}</p>
+                <p>{errors?.time?.message}</p>
+              </Box>
+              <Box
+                sx={{
+                  width: "50%",
+                }}
+              >
+                <TextField
+                  id="demo-helper-text-misaligned"
+                  sx={{ minWidth: "30%" }}
+                  placeholder="Temperature de cuisson"
+                  className={clsx(textFieldClasses.second)}
+                  {...register(`instructions.${index}.temperature`, {
+                    required: "Saisir la Temperature de cuisson ",
+                  })}
+                />
+                <p>{errors?.temperature?.message}</p>
               </Box>
             </Box>
           </Box>
@@ -121,7 +137,7 @@ const InstructionInput = ({ updateMode }: any) => {
           <Plus />
         </IconButton>
         <p className={nutritionClasses.add_nutrition_text}>
-          Ajouter un nouvel facteur nutritionnel{" "}
+          Ajouter de nouvelles instructions
         </p>
       </Box>
     </>
