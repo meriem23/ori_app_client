@@ -24,6 +24,29 @@ export const useGetIngredients = () =>
     }
   );
 
+export const useSearchIngredients = (family: string, shape: string) =>
+  useQuery(
+    ["searchedIngredients", family, shape],
+    async () => {
+      let url = `https://esra-app-back.herokuapp.com/api/ingredient/search/${family}/${shape}`;
+
+      let token = localStorage.getItem("token");
+      // console.log(token);
+      return axiosInstance({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "*/*",
+        },
+      }).then((res: any) => res.data);
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: family && shape ? true : false,
+    }
+  );
+
 // get one ingredient
 export const useGetIngredient = (id: string) =>
   useQuery(

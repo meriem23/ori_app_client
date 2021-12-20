@@ -26,7 +26,12 @@ type recipeProps = {
     ingredient__label: string;
     ingredient__quantity: string;
   }[];
-  instructions: string;
+  instructions: {
+    title: string;
+    instruction: string;
+    temperature: string;
+    time: string;
+  }[];
 };
 
 const AddRecipe = () => {
@@ -37,7 +42,7 @@ const AddRecipe = () => {
   const methods = useForm<recipeProps>({
     defaultValues: {
       name: "",
-      instructions: "",
+      instructions: [{ title: "", instruction: "", temperature: "", time: "" }],
       ingredients: [
         {
           family: "",
@@ -145,9 +150,9 @@ const AddRecipe = () => {
                 required: "Saisir les Instructions de Cuissons",
               })}
             />
-            <p className={clsx(textFieldClasses.error)}>
+            {/* <p className={clsx(textFieldClasses.error)}>
               {errors?.instructions?.message}
-            </p>
+            </p> */}
           </div>
           <Button
             type="submit"
