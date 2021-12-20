@@ -39,7 +39,7 @@ import Trash from "../../../icons/Trash";
 import { getComparator, stableSort } from "../../../utils/tableFunctions";
 import { useToolbarStyles } from "../../../styles/TollbarStyles";
 import { useStylesMenu } from "../../../styles/menuStyles";
-import { DeleteIngredient } from "../../../services/IngredientsServices/ingredientServices";
+import { DeleteRecipe } from "../../../services/recipeServices/recipeServices";
 
 // import { useStylesMenu } from "../../../styles/menuStyles";
 // import { useToolbarStyles } from "../../../styles/TollbarStyles";
@@ -162,7 +162,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           id="tableTitle"
           component="div"
         >
-          Liste des Ingrédients
+          Liste des Recettes
         </Typography>
       )}
       {/* if any elements are selected in the table -> show button for any action */}
@@ -210,7 +210,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface MuiTableRowProps {
-  Ingredient: any;
+  Recipe: any;
   index: number;
   handleClick: any;
   isSelected: any;
@@ -218,7 +218,7 @@ interface MuiTableRowProps {
 }
 
 const MuiTableRow = ({
-  Ingredient,
+  Recipe,
   index,
   isSelected,
   handleClick,
@@ -231,7 +231,7 @@ const MuiTableRow = ({
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const isItemSelected = isSelected(Ingredient._id);
+  const isItemSelected = isSelected(Recipe._id);
   const labelId = `enhanced-table-checkbox-${index}`;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -241,10 +241,10 @@ const MuiTableRow = ({
   };
 
   const {
-    mutateAsync: deleteIngredient,
-    isLoading: isMutatingDeleteIngredient,
-    isSuccess: isSuccessDeleteIngredient,
-  } = useMutation(DeleteIngredient);
+    mutateAsync: deleteRecipe,
+    isLoading: isMutatingDeleteRecipe,
+    isSuccess: isSuccessDeleteRecipe,
+  } = useMutation(DeleteRecipe);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -260,19 +260,17 @@ const MuiTableRow = ({
     setOpen(false);
   };
 
-  const handleDeleteIngredient = (idIngredient: string) => {
-    console.log("#idIngredient", idIngredient);
-
-    deleteIngredient(idIngredient);
+  const handleDeleteRecipe = (idRecipe: string) => {
+    deleteRecipe(idRecipe);
   };
 
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (isSuccessDeleteIngredient) {
+    if (isSuccessDeleteRecipe) {
       setOpen(false);
 
-      enqueueSnackbar("Ingrédient supprimé avec succès", {
+      enqueueSnackbar("Recette supprimés avec succès", {
         variant: "success",
         anchorOrigin: {
           vertical: "bottom",
@@ -280,15 +278,13 @@ const MuiTableRow = ({
         },
       });
 
-      queryClient.refetchQueries("ingredients");
+      queryClient.refetchQueries("recipe");
 
       setTimeout(() => {
         closeSnackbar();
       }, 5000);
     }
-  }, [isSuccessDeleteIngredient]);
-
-  console.log("#Ingredient ", Ingredient);
+  }, [isSuccessDeleteRecipe]);
   return (
     <TableRow
       hover
@@ -296,20 +292,13 @@ const MuiTableRow = ({
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
-      key={Ingredient._id}
+      key={Recipe._id}
       selected={isItemSelected}
     >
-      {/* <TableCell padding="checkbox">
-        <Checkbox
-          checked={isItemSelected}
-          inputProps={{ "aria-labelledby": labelId }}
-          onClick={(event: any) => handleClick(event, Ingredient._id)}
-        />
-      </TableCell> */}
       {headCells.filter((el: any) => el.id === "_id")[0]?.checked && (
         <TableCell component="th" id={labelId} scope="row" padding="none">
-          {Ingredient._id ? (
-            Ingredient._id
+          {Recipe._id ? (
+            Recipe._id
           ) : (
             <span style={{ fontWeight: 700 }}>--</span>
           )}
@@ -317,36 +306,13 @@ const MuiTableRow = ({
       )}
       {headCells.filter((el: any) => el.id === "name")[0]?.checked && (
         <TableCell>
-          {Ingredient.name ? (
-            Ingredient.name
+          {Recipe.name ? (
+            Recipe.name
           ) : (
             <span style={{ fontWeight: 700 }}>--</span>
           )}
         </TableCell>
       )}
-      {headCells.filter((el: any) => el.id === "family")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.family ? (
-            Ingredient?.family?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {headCells.filter((el: any) => el.id === "shape")[0]?.checked && (
-        <TableCell>
-          {Ingredient?.shape ? (
-            Ingredient?.shape?.name
-          ) : (
-            <span style={{ fontWeight: 700 }}>--</span>
-          )}
-        </TableCell>
-      )}
-      {/* {headCells.filter((el: any) => el.id === "rol_Approval_N")[0].checked && (
-        <TableCell>
-          {Ingredient.rol_Approval_N === "1" ? "active" : "Inactive"}
-        </TableCell>
-      )} */}
       <TableCell className={tableClasses.fixed_width_table_column}>
         <button
           onClick={handleClickMenu}
@@ -394,13 +360,11 @@ const MuiTableRow = ({
       >
         <DialogTitle className={DialogClasses.alert_dialog_title}>
           <Trash />
-          <span className="alert_dialog_title_text">
-            Supprimer ingrédient ?
-          </span>
+          <span className="alert_dialog_title_text">Supprimer recette ?</span>
         </DialogTitle>
         <DialogContent className={DialogClasses.alert_dialog_content}>
           <DialogContentText>
-            êtes vous sur de supprimer cet ingrédient ?
+            êtes vous sur de supprimer cette recette ?
           </DialogContentText>
         </DialogContent>
         <DialogActions className={DialogClasses.alert_dialog_actions}>
@@ -413,7 +377,7 @@ const MuiTableRow = ({
           </Button>
           <Button
             className={clsx(ButtonClasses.RedButton)}
-            onClick={() => handleDeleteIngredient(Ingredient._id)}
+            onClick={() => handleDeleteRecipe(Recipe._id)}
             color="primary"
             autoFocus
           >
@@ -537,7 +501,7 @@ export default function RecepiesListEnhancedTable({
                   return (
                     <MuiTableRow
                       index={index}
-                      Ingredient={role}
+                      Recipe={role}
                       isSelected={isSelected}
                       handleClick={handleClick}
                       key={index}
