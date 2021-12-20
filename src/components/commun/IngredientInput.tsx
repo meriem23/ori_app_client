@@ -28,7 +28,6 @@ const IngredientInput: FC = () => {
   const {
     control,
     formState: { errors },
-    setValue,
   } = useFormContext<any>();
 
   const { fields, append, remove } = useFieldArray<any>({
@@ -36,43 +35,27 @@ const IngredientInput: FC = () => {
     name: "ingredients",
   });
 
-  const dataWatch = useWatch({
-    control,
-  });
-  //queries and mutations
-  // const {
-  //   data: familiesData,
-  //   isLoading: isLoadingfamilies,
-  //   isSuccess: isSuccessfamilies,
-  //   refetch: refetchIngredients,
-  // } = useGetFamilies();
-
-  // const { data: ingredientData } = useGetIngredients();
-
-  //functions
-  // const onDeleteShapesTags = (item: any) => () => {
-  //   const dishTags =
-  //     dataWatch?.shapes?.filter((row: any) => row.name !== item.name) || [];
-  //   setValue("shapes", dishTags as any);
-  // };
-
-  //use Effects
-  // useEffect(() => {
-  //   if (dataWatch.ingredients) {
-  //     setselectedFamily(
-  //       familiesData.filter((el: any) => el._id === dataWatch.family)[0]
-  //     );
-  //   } else if (!dataWatch.family) {
-  //     setValue("shapes", []);
-  //     setselectedFamily(undefined);
-  //   }
-  // }, [dataWatch.ingredients]);
-
   return (
     <>
       <Box>
         {fields.map((item, index) => (
-          <OneIngredientInput remove={remove} index={index} />
+          <>
+            <OneIngredientInput
+              remove={remove}
+              index={index}
+              lengthFields={fields.length}
+            />
+            {fields.length > index + 1 && (
+              <div
+                style={{
+                  minWidth: "100%",
+                  height: 1,
+                  backgroundColor: "grey",
+                  marginBottom: 22,
+                }}
+              ></div>
+            )}
+          </>
         ))}
       </Box>
       <Box

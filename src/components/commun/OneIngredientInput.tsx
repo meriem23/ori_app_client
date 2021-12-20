@@ -23,8 +23,10 @@ import CloseIcon from "@material-ui/icons/Close";
 const OneIngredientInput = ({
   index,
   remove,
+  lengthFields,
 }: {
   index: number;
+  lengthFields: number;
   remove: any;
 }) => {
   //styles
@@ -88,23 +90,31 @@ const OneIngredientInput = ({
     }
   }, [dataWatch]);
 
+  useEffect(() => {
+    if (!dataWatch.ingredients[index].family) {
+      setValue(`ingredients.${index}.shape`, "");
+      setValue(`ingredients.${index}.ingredient__label`, "");
+    }
+  }, [dataWatch.ingredients[index].family]);
+
   return (
     <>
       <Box>
         <>
           <Box className={nutritionClasses.field_nutrition_container}>
-            <IconButton
-              onClick={() => {
-                remove(index);
-              }}
-              className={nutritionClasses.delete_button}
-            >
-              <ClearIcon />
-            </IconButton>
+            {lengthFields > 1 && (
+              <IconButton
+                onClick={() => {
+                  remove(index);
+                }}
+                className={nutritionClasses.delete_button}
+              >
+                <ClearIcon />
+              </IconButton>
+            )}
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "space-between",
                 width: "100%",
                 padding: "0px 0 8px",
@@ -232,7 +242,7 @@ const OneIngredientInput = ({
                       options={searchedResult ? searchedResult : []}
                       getOptionLabel={(option: any) => option.name}
                       sx={{ width: "100%" }}
-                      onChange={(_, data) => Change(data._id)}
+                      onChange={(_, data) => Change(data?._id ? data?._id : "")}
                       renderInput={(params) => (
                         <TextField
                           {...params}
