@@ -93,7 +93,7 @@ const OneIngredientInput = ({
   useEffect(() => {
     if (!dataWatch.ingredients[index].family) {
       setValue(`ingredients.${index}.shape`, "");
-      setValue(`ingredients.${index}.ingredient__label`, "");
+      setValue(`ingredients.${index}.ingredient`, "");
     }
   }, [dataWatch.ingredients[index].family]);
 
@@ -230,7 +230,7 @@ const OneIngredientInput = ({
                 }}
               >
                 <Controller
-                  name={`ingredients.${index}.ingredient__label`}
+                  name={`ingredients.${index}.ingredient`}
                   control={control}
                   render={({
                     field: { onChange: Change, value, ref, ...rest },
@@ -267,7 +267,7 @@ const OneIngredientInput = ({
                   sx={{ minWidth: "100%" }}
                   placeholder="Quantité"
                   className={clsx(textFieldClasses.second)}
-                  {...register(`ingredients.${index}.ingredient__quantity`, {
+                  {...register(`ingredients.${index}.quantity`, {
                     required: "Saisir la quantité de l'ingrédient",
                   })}
                 />

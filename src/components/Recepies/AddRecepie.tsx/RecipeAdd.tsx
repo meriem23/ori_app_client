@@ -24,8 +24,8 @@ type recipeProps = {
   ingredients: {
     family: string;
     shape: string;
-    ingredient__label: string;
-    ingredient__quantity: string;
+    ingredient: string;
+    quantity: string;
   }[];
   instructions: {
     title: string;
@@ -48,8 +48,8 @@ const AddRecipe = () => {
         {
           family: "",
           shape: "",
-          ingredient__label: "",
-          ingredient__quantity: "",
+          ingredient: "",
+          quantity: "",
         },
       ],
     },

@@ -6,7 +6,7 @@ export const login = (data: any) => {
     method: "post",
     url: "https://esra-app-back.herokuapp.com/api/users/login-user",
     headers: {
-      Accept: "application/json",
+      Accept: "application/json, text/plain, /",
       "Content-Type": "application/json",
     },
     data,
@@ -21,7 +21,7 @@ export const getUser = () => {
     url: "https://esra-app-back.herokuapp.com/api/users/profile",
     headers: {
       Authorization: `Bearer ${token}`,
-      Accept: "application/json",
+      Accept: "application/json, text/plain, /",
       "Content-Type": "application/json",
     },
   });
@@ -35,7 +35,7 @@ export const registerUser = (data: any) => {
     url: "https://esra-app-back.herokuapp.com/api/users/register-user",
     headers: {
       Authorization: `Bearer ${token}`,
-      Accept: "application/json",
+      Accept: "application/json, text/plain, /",
       "Content-Type": "application/json",
     },
     data: {
